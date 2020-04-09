@@ -1,0 +1,948 @@
+%\documentclass[compress]{beamer}
+
+\documentclass[8pt,hyperref={pdfpagemode=FullScreen}]{beamer}
+%\documentclass[hyperref={pdfpagemode=FullScreen}]{beamer}
+
+\usepackage{amsmath,amssymb,makeidx,amsfonts,latexsym,enumerate,amsthm,tikz,lipsum,schemata,wasysym}
+
+
+%\setbeamercovered{transparent}
+\usepackage{color}
+
+\usepackage{amsmath,amscd,amssymb,amsfonts,graphicx,rotating}
+\usepackage{mathrsfs}
+\usepackage{hyperref}
+
+
+%\usepackage{beamerthemeshadow}
+
+%\usetheme{CambridgeUS}
+
+%\useoutertheme{infolines} %alt compress i documentclass
+
+
+
+\usepackage{cite}
+
+%\setbeamertemplate{footline}{\insertframenumber/\inserttotalframenumber}
+
+
+\usepackage[T1]{fontenc}
+\usepackage[swedish]{babel}
+\usepackage[latin1]{inputenc}
+
+\newtheorem{conjecture}{Conjecture}[section]
+\newtheorem{open problem}{Open problem}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{remark}{Remark}[section]
+
+
+
+
+
+
+
+\title{F6 Funktioner av slumpvariabler och mer om väntevärden}
+\subtitle{Tillämpad sannolikhetslära och statistik}
+
+%\subtitle{\noindent[1] L.The size of quadratic $p$-adic linearization disks \textit{Advances in Mathematics}, 2013\\ 
+%\noindent [2] L. \& Rivera-Letelier,  `Optimal cycles and minimally ramified power series', \textit{Composito Mathematica}, 2014}
+
+\author{Karl-Olof Lindahl}
+
+%\institute{Department of Mathematics, Linnaeus University}
+
+\date{}
+
+
+
+%\frame[c]{\titlepage}
+
+
+
+
+\begin{document}
+
+
+
+\maketitle
+
+
+
+
+\begin{frame}
+
+\frametitle{Innehåll}
+
+\begin{enumerate}
+
+%\pause
+\item\textbf{Linjära transformationer}
+
+\item \textbf{Summor av slumpvariabler}
+
+\item \textbf{\textcolor{blue}{Summor av oberoende slumpvariabler} och faltning (convolution)}
+
+\item \textbf{\textcolor{blue}{Additionssatser för vanliga fördelningar}}
+
+\item \textbf{Största och minsta värde}
+
+\item \textbf{Weibullfördelning som minimum - svagaste länk*}
+
+\item\textbf{Faltning oberoende exponentialfördelningar: sammanlagd livslängd*}
+
+Del 2
+
+\item\textbf{Väntevärde och varians för funktioner av slumpvariabler}
+
+\item\textbf{Produktregel för väntevärde av oberoende slumpvariabler}
+
+\item\textbf{Beroendemått - Kovarians (Covariance)*}
+
+%\pause
+\item\textbf{\textcolor{blue}{Räkneregler för väntevärde och varians}}
+
+\item\textbf{Väntevärde och varians för binomialfördelningen}
+
+\item\textbf{Betingat väntevärde (Conditional expectation)*}
+%Del 3
+
+%\item\textbf{Centrala gränsvärdessatsen}
+
+\end{enumerate}
+
+* ej obligatorisk för 1MA511
+
+\end{frame}
+
+
+
+
+\begin{frame}
+
+\frametitle{På agendan}
+
+Tillämpad sannolikhetslära och statistik, \emph{Karl-Olof Lindahl}
+
+
+\begin{enumerate}
+
+
+
+\item\textbf{Linjära transformationer}
+
+\item \textbf{Summor av slumpvariabler}
+
+\item \textbf{\textcolor{blue}{Summor av oberoende slumpvariabler} och faltning (convolution)}
+
+\item \textbf{\textcolor{blue}{Additionssatser för vanliga fördelningar}}
+
+\item \textbf{Största och minsta värde}
+
+\item \textbf{Weibullfördelning som minimum - svagaste länk*}
+
+\item\textbf{Faltning oberoende exponentialfördelningar: sammanlagd livslängd*}
+
+
+%\pause
+%\item\textbf{Räkneregler för väntevärde och varians}
+
+%\item\textbf{Dimensionering antal parkeringsplatser}
+
+%\item\textbf{Centrala gränsvärdessatsen}
+
+
+
+\end{enumerate}
+
+* ej obligatorisk för 1MA511
+
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Inledande exempel funktioner av slumpvariabler}
+
+Ett företag tillverkar brädor av längden 1 m. Vid tillverkningen varierar längden kring det exakta värdet 1 m. 
+Avvikelsen i meter $X$ är normalfördelad med väntevärde $\mu=0.001$ och standardavvikelse $\sigma=0.005$.
+Låt $Y$ vara längden för en slumpvis vald tillverkad bräda.
+
+\begin{enumerate}
+
+\item Uttryck $Y$ som funktion av $X$.
+
+\pause
+
+Lösning: $Y=X+1$
+
+
+\pause
+\item Vilken fördelning har $Y$?
+
+\pause
+Lösning: Fördelningsfunktionen 
+$$
+F_Y(y)=P(Y\leq y)=P(X+1\leq y)=P(X\leq y-1)=F_X(\textcolor{blue}{y-1}).
+$$
+
+Derivering med avseende på $y$ ger täthetsfunktionen
+$$
+f_Y(y)=f_X( \textcolor{blue}{y-1})=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(\textcolor{blue}{y-1}-\mu)^2}{2\sigma^2}}=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-(\mu+1))^2}{2\sigma^2}}.
+$$
+Alltså är $Y\sim N(\mu+1,\sigma^2)=N(1.001,0.005^2)$.
+\end{enumerate}
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Linjär transformation}
+
+Antag att $X$ är en kontinuerlig stokastiska variabel och låt $a$ och $b$ vara konstanter.
+Sätt 
+$$
+Y=aX+b.
+$$
+
+\begin{itemize}
+
+\item Om $a$ är positivt blir
+$$
+F_Y(y)=P(Y\leq y)=P(aX+b\leq y)=P(X\leq \frac{y-b}{a})=F_X( \frac{y-b}{a})
+$$
+Motsvarande täthetsfunktion fås genom derivering av fördelningsfunktionen med avseende på $y$ vilket ger
+$$
+f_Y(y)=\frac{1}{a}f_X( \frac{y-b}{a})
+$$
+\item Om $a$ är negativt blir, eftersom $X$ är kontinuerlig,
+$$
+F_Y(y)=P(Y\leq y)=P(aX+b\leq y)=P(X\geq \frac{y-b}{a})=1-F_X( \frac{y-b}{a})
+$$
+Motsvarande täthetsfunktion fås genom derivering av fördelningsfunktionen med avseende på $y$ vilket ger
+$$
+f_Y(y)=-\frac{1}{a}f_X( \frac{y-b}{a})
+$$
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Summor av slumpvariabler}
+
+Antag att $X$ och $Y$ är diskreta slumpvariabler  som bara antar heltalsvärden. Detsamma gäller då summan $Z=X+y$
+som får sannolikhetsfunktionen 
+$$
+p_Z(z)=P(Z=z)=P(X+Y=z).
+$$
+\pause Vi bestämmer fördelningen på följande sätt
+\begin{itemize}
+
+\item Händelsen $X+Y=z$ kan inträffa på olika sätt: $X=0$ och $Y=z$, $X=1$ och $Y=z-1$ osv. 
+
+
+\item Sannolikheten för en sådan händelse blir då en summa i termer av simultanfördelningen  
+$$
+p_Z(z)=P(X+Y=z)=\sum_{x+y=z}p_{X,Y}(x,y).
+$
+\begin{figure}
+\includegraphics[scale=0.0372]{summadiskret.jpeg}
+\end{figure}
+\end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Summor av oberoende slumpvariabler och faltning}
+
+Betrakta återigen stokastiska variabel av typen
+$$
+Z=X+Y.
+$$
+Ett mycket viktigt specialfall är fallet då $X$ och $Y$ är oberoende. 
+
+\bigskip
+\pause
+Då är som vi tidigare visat $p_{X,Y}(x,y)=p_X(x)p_Y(y)$ och vi får 
+$$
+p_Z(z)=\sum_{x+y=z}p_X(x)p_Y(y)=\sum_{i=0}^{z}p_X(i)p_Y(z-i).
+$$
+\pause
+Formeln kallas faltningsformeln för diskreta slumpvariabler (convolution formula).
+
+\bigskip
+\bigskip
+\bigskip
+\pause
+I det kontinuerliga fallet* räknar man först med fördelningsfunktionen för $Z=X+Y$ och får, under antagande om oberoende, 
+$$
+F_Z(z)=\int_{-\infty}^{{\infty}}f_X(x)F_Y(z-x)dx,
+$$
+som efter derivering med avseende på $z$ (om tillåten) ger faltningsformeln för täthetsfunktionen 
+$$
+f_Z(z)=\int_{-\infty}^{{\infty}}f_X(x)f_Y(z-x)dx.
+$$
+
+
+
+\end{frame}
+
+\begin{frame}
+
+\textbf{Uppgift:} Antag att sannolikheten är 25\% att ett
+hushåll inte har någon bil, 50\% att ett hushåll har en bil och 25\%
+att ett hushåll har två bilar. 
+Bestäm sannolikhetsfunktionen för hur många bilar två oberoende slumpvis valda familjer har tillsammans.
+
+\pause
+\bigskip
+\textbf{Lösning:} 
+Inför stokastiska variablerna $X_1$ och $X_2$ för antalet bilar i hushåll 1 respektive 2.
+
+\pause
+\bigskip
+Vi söker sannolikhetsfunktionen för $Z=X_1+X_2$.
+
+\pause
+\bigskip
+Enligt uppgift har de samma fördelning och sannolikhetsfunktion: $p_{X_1}(0)=0.25$, $p_{X_1}(1)=0.5$, $p_{X_1}(2)=0.25$.
+
+\pause
+\bigskip
+Vidare är enligt uppgift $X_1$ och $X_2$  oberoende så värdena för den sökta sannolikhetsfunktionen
+$p_Z(z)$ ges av faltningsformeln och vi får:
+
+\bigskip
+
+$
+p_z(0)=p_{X_1}(0)p_{X_1}(0)=0.25\cdot 0.25=\textcolor{blue}{0.0625}
+$
+
+$
+p_Z(1)=p_{X_1}(0)p_{X_1}(1)+p_{X_1}(1)p_{X_1}(0)=\textcolor{blue}{0.25}
+$
+
+$
+p_Z(2)=p_{X_1}(0)p_{X_1}(2)+p_{X_1}(1)p_{X_1}(1)+p_{X_1}(2)p_{X_1}(0)=\textcolor{blue}{0.375}
+$
+
+$
+p_Z(3)=p_{X_1}(1)p_{X_1}(2)+p_{X_1}(2)p_{X_1}(1)=\textcolor{blue}{0.25}
+$
+
+$
+p_z(4)=p_{X_1}(2)p_{X_1}(2)=\textcolor{blue}{0.0625}
+$
+\pause
+\begin{figure}
+\includegraphics[scale=0.06]{twohouseholds.jpeg}
+\end{figure}
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Additionssatser för viktiga \emph{specialfall}}
+
+Antag att $X_1$ och $X_2$ är \emph{oberoende} slumpvariabler och
+$$
+Y=X_1+X_2.
+$$
+
+\begin{enumerate}
+
+\pause\item $X_1\sim Bin(n_1,p)$ och $X_2\sim Bin(n_2,p)$ $\Rightarrow$ 
+$$
+Y\sim Bin(n_1+n_2,p).
+$$
+
+\pause\item $X_1\sim P(m_1)$ och $X_2\sim Po(m_2)$ $\Rightarrow$ 
+$$
+Y\sim Po(m_1+m_2).
+$$
+
+\pause\item $X_1\sim N(\mu_1,\sigma_1^2)$ och $X_2\sim N(\mu_2,\sigma_2^2)$ $\Rightarrow$ 
+$$
+Y\sim N(\mu_1+\mu_2,\sigma_1^2+\sigma_2^2).
+$$
+
+\end{enumerate}
+
+\pause Om $Y=aX_1+bX_2$ har vi för normalfördelningen dessutom att
+$$
+Y\sim N(a\mu_1+b\mu_2,a^2\sigma_1^2+b^2\sigma_2^2).
+$$
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Största och minsta värde för två oberoende s.v.}
+%Man har ofta anledning att studera största och minsta av två eller flera s.v.
+
+\bigskip
+\textbf{Största värdet av två oberoende fördelningar}
+
+Sätt $Z=\max(X,Y)$. Eftersom $Z\leq z$ om och endast om både $X\leq z$ och $Y\leq z$ får man under antagande om oberoende 
+$$
+F_Z(z)=P(Z\leq z)=P(X\leq z,Y\leq z)=F_X(z)F_Y(z).
+$$
+
+
+\textcolor{blue}{Parallellkoppling} av två elektroniska komponenter med förväntad livslängd $a$ respektive $b$. De antas fungera så länge \textcolor{blue}{minst en} av komponenterna gör det och vi får
+$$
+F_Z(z)=(1-e^{-z/a})(1-e^{-z/b})\quad z\geq 0.
+$$
+
+\bigskip
+\pause
+\textbf{Minsta värdet av två oberoende fördelningar}
+
+Sätt $Z=\min(X,Y)$. Eftersom $Z> z$ om och endast om både $X> z$ och $Y>z$ får man under antagande om oberoende 
+\begin{equation*}
+\begin{split}
+F_Z(z)&=P(Z\leq z)=1-P(Z>z)=1-P(X>z,Y> z) \\
+       &=1-(1-P(X\leq z))(1-P(Y\leq z)\\
+         &=1-[1-F_X(z)][1-F_Y(z)].
+\end{split}
+\end{equation*}
+
+\textcolor{blue}{Seriekoppling} av två elektroniska komponenter med förväntad livslängd $a$ respektive $b$. De antas fungera så länge \textcolor{blue}{båda} komponenterna gör det och vi får
+$$
+F_Z(z)=1-[1-(1-e^{-z/a})][1-(1-e^{-z/b})]=1-e^{-(\frac{1}{a}+\frac{1}{b})z}, \quad z\geq 0.
+$$
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Weibullfördelning som minimum - svagaste länk*}
+
+Formlerna för största och minsta värde kan generaliseras till $n$
+oberoende slumpvariabler med samma fördelningsfunktion $F(z)$. 
+
+\begin{itemize}
+\item
+Om $Z$ är maximum för dessa får vi då $F_Z(z)=[F(z)]^n$.
+\item
+Om $Z$ är maximum för dessa får vi då $F_Z(z)=1-[1-F(z)]^n$.
+\end{itemize}
+
+\bigskip
+\pause
+Antag att $F(x)\approx x^c$ för små positiva $x$ och ett tal $c>0$.
+Om vi har många oberoende slumpvariabler $X_1, X_2, \dots, X_n$
+med denna fördelning och låter 
+$$
+Y_n=\min(X_1,X_2,\dots,X_n)
+$$
+ser vi att då $n\to\infty$ blir $Y_n$ litet.
+Vi får då för $x>0$ att 
+\begin{equation*}
+\begin{split}
+P(n^{1/c}Y_n\leq x) &= P(Y_n\leq\frac{x}{n^{1/c}}) =1-[1-F(x/n^{1/c})]^n \\
+                               &\approx 1-(1-\frac{x^c}{n})^n\to 1-e^{-x^c}, \quad  n\to \infty.     
+\end{split}
+\end{equation*}
+\pause
+Vi ser alltså att $n^{1/c}Y_n$ blir approximativt Weibullfördelad med formparameter $c$.
+
+%\pause
+\bigskip
+Detta kan ses som en motivering till varför \textcolor{blue}{Weibullfördelningen} kan vara en bra modell för hållfasthetsdata eftersom 
+man kan se t ex brottsgränser som \textcolor{blue}{resultatet av minimumbildning - en kjedja är inte starkare än sin svagaste länk!}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Faltning oberoende exponentialfördelningar: sammanlagd livslängd*}
+
+Antag att $X\sim Exp(a)$ och $Y\sim Exp(a)$ och att $X$ och $Y$ är oberoende. Fördelningsfunktionen för $Z=X+Y$ ges under antgagande av obeoende av faltningsintegralen 
+$$
+F_Z(z)=\int_{-\infty}^{{\infty}}f_X(x)F_Y(z-x)dx,
+$$
+observera att $f_X(x)=0$ för $x<0$ och $F_Y(z-x)=0$ för $x\leq z$. Vi får alltså
+\begin{equation*}
+\begin{split}
+\textcolor{blue}{F_Z(z)}& =\int_{0}^{{z}}\frac{1}{a}e^{-\frac{1}{a}x}(1-e^{-\frac{1}{a}(z-x)})dx\\
+          & = \int_{0}^{{z}}\frac{1}{a}e^{-\frac{1}{a}\textcolor{red}{x}}-\frac{1}{a}e^{-\frac{1}{a}z}\textcolor{red}{dx}\\
+           & = [-e^{-\frac{1}{a}x}]_0^z-\frac{1}{a}e^{-\frac{1}{a}z}[x]_0^{z}=\textcolor{blue}{1-e^{-\frac{1}{a}z}-\frac{1}{a}ze^{-\frac{1}{a}z}}.
+\end{split}
+\end{equation*}
+\pause
+Efter derivering med avseende på $z$ får vi täthetsfunktionen 
+$$
+f_Z(z)=\frac{z}{a^2}e^{-\frac{1}{a}z}, \quad z\geq 0.
+$$
+\begin{itemize}
+\item Formlerna ovan kan t ex användas för att studera sammanlagda livslängden för elektroniska komponenter eller sammanlagda väntetiden i en produktionskjedja.
+\item Man kan med hjälp av induktion generalisera till summan av $n$ stycken oberoende exponentialfördelningar och får då en så kallad gammafördelning:
+$$
+f_Z(z)=\frac{z^{n-1}}{a^n(n-1)!}e^{-\frac{1}{a}z}, \quad z\geq 0.
+$$
+\end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}
+
+\frametitle{På agendan}
+
+Tillämpad sannolikhetslära och statistik, \emph{Karl-Olof Lindahl}
+
+
+\begin{enumerate}
+
+
+
+\item\textbf{Väntevärde och varians för funktioner av slumpvariabler}
+
+\item\textbf{Produktregel för väntevärde av oberoende slumpvariabler}
+
+\item\textbf{Beroendemått - Kovarians (Covariance)*}
+
+%\pause
+\item\textbf{\textcolor{blue}{Räkneregler för väntevärde och varians}}
+
+\item\textbf{Väntevärde och varians för binomialfördelningen}
+
+\item\textbf{Betingat väntevärde (Conditional expectation)*}
+
+%\item\textbf{Centrala gränsvärdessatsen}
+
+
+
+\end{enumerate}
+
+* ej obligatorisk för 1MA511
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Väntevärde och varians för funktioner av slumpvariabler}
+
+
+\textbf{Teorem:}
+Om $Y=g(X)$ gäller 
+$$
+E[g(X)]=
+\begin{cases}
+\sum_{x}g(x)p_X(x), \quad \text{ diskret s.v.},\\
+\int_{-\infty}^{\infty}g(x)f_X(x)dx, \quad \text{ kontinuerlig s.v.}
+\end{cases}
+$$
+
+
+\pause
+Av detta följer att \textcolor{blue}{$E$ är en linjär operator}:
+$$
+E[g(X)+h(X)]=E[g(X)]+E[h(X)].
+$$ 
+
+\pause
+Som en konsekvens av detta har vi följande räkneregler för linjär transformation
+\begin{equation}
+\textcolor{blue}{E[aX+b]=aE[X]+b}
+\end{equation}
+och 
+\begin{equation}
+\textcolor{red}{V[aX+b]=a^2V[X]}.
+\end{equation}
+\textbf{Bevis för den andra ekvationen:}
+Sätt $\mu=E[X]$. Då ger första ekvationen att $E[aX+b]=a\mu +b$. Vi får då enligt definitionen av varians och linjariteten för $E$
+$$
+V[aX+b]=E[(aX+b-a\mu-b)^2]=E[(aX-a\mu)^2]=a^2E[(X-\mu)^2]=a^2V[X].
+$$
+
+
+
+%\bigskip\pause 
+%Antag nu att $X$ och $Y$ är \textbf{oberoende}. Då är
+
+%\begin{enumerate}
+
+%\pause\item $V[aX+bY+c]=a^2V[X]+b^2V[Y]$
+
+%\pause\item $E[X\cdot Y]=E[X]\cdot E[Y]$
+
+%\end{enumerate}
+
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Produktregel för väntevärde av oberoende slumpvariabler}
+
+\textbf{Teorem:} Om $X$ och $Y$ är oberoende slumpvariabler gäller $E[XY]=E[X]E[Y].$
+
+\bigskip 
+\pause
+Anmärkning: Omvändningen till teoremet gäller inte!
+
+
+\pause
+\bigskip
+\textbf{Bevis diskreta fallet:} 
+
+\begin{equation*}
+\begin{split}
+E[XY] & =\sum_{x}\sum_{y}xy p_{X,Y}(x,y)=\sum_{x}\sum_{y}xy p_{X}(x)p_Y(y)=\\
+          &\sum_{x}x p_{X}(x)\cdot \sum_{y}yp_Y(y)=E[X]E[Y].
+\end{split}
+\end{equation*} 
+
+
+\pause
+\bigskip
+\textbf{Bevis kontinuerliga fallet:} 
+
+\begin{equation*}
+\begin{split}
+E[XY] & =\int_{-\infty}^{{\infty}}\int_{-\infty}^{{\infty}}xy f_{X,Y}(x,y)  dxdy=\int_{-\infty}^{{\infty}}\int_{-\infty}^{{\infty}}x f_{X}(x)\cdot y f_Y(y)dxdy=\\
+          &\int_{-\infty}^{{\infty}}x f_{X}(x)dx \cdot \int_{-\infty}^{{\infty}} yf_Y(y)dy=E[X]E[Y].
+\end{split}
+\end{equation*} 
+
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Beroendemått - Kovarians (Covariance)*}
+
+\textbf{Definition:} \textcolor{blue}{Kovariansen} för två slumpvariabler $X$ och $Y$ med väntevärde $\mu_X$ respektive $\mu_Y$ betecknas $C(X,Y)$ och definieras som 
+$$
+C(X,Y)=E[(X-\mu_X)(Y-\mu_Y)].
+$$
+\textbf{Teorem}
+$$
+C(X,Y)=E[XY]-E[X]E[Y].
+$$
+
+\pause
+\bigskip
+\textbf{Definition:}  $X$ och $Y$ är \textcolor{blue}{okorrelerade} om $C(X,Y)=0$
+
+\pause
+\bigskip
+\textbf{Teorem} Om $X$ och $Y$ är oberoende så är de också okorrelerade.
+
+
+%\bigskip 
+\pause
+Anmärkning: Omvändningen till teoremet gäller inte!
+
+\pause
+\bigskip
+\textbf{Definition:}  \textcolor{blue}{Korrelationskoefficienten} för två slumpvariabler $X$ och $Y$, med standardavvikelse
+$D[X]$ och $D[Y]$,
+betecknas $\rho(X,Y)$ och definieras som 
+$$
+\rho(X,Y)=\frac{C(X,Y)}{D[X]D[Y]}.
+$$
+Man kan då visa att $-1\leq \rho\leq 1$ och att $\rho=\pm 1$ om och endast om $Y=aX+b$.
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Räkneregler för väntevärde och varians}
+
+
+Linjariteten för väntevärden ger:
+$$
+E[aX+bY+c]=aE[X]+bE[Y]+c
+$$
+Man kan visa utgående från definitionen av varians och kovarians att 
+$$
+V[X+Y]=V[X]+V[Y]+2C(X,Y).
+$$
+
+\bigskip\pause 
+I det viktiga specialfallet då $X$ och $Y$ är \textbf{oberoende} har vi dessutom
+
+\begin{enumerate}
+
+\pause\item $V[aX+bY+c]=a^2V[X]+b^2V[Y]$
+
+\pause\item $E[X\cdot Y]=E[X]\cdot E[Y]$
+
+\end{enumerate}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Väntevärde och varians för binomialfördelningen}
+
+Låt \textcolor{blue}{$X\sim Bin (n,p)$}. Då kan $X$ ses som summan av $n$ stycken oberoende försök med Bernoullifördelade slumpvariabler dvs
+$$
+X=X_1+X_2+\dots +X_n, \quad \text{där varje $X_i\sim Bernoulli(p)$}.
+$$ 
+Vidare är för varje $i=1,2\dots,n$ väntevärdet 
+$$
+E[X_i]=0\cdot (1-p)+1\cdot p=p
+$$ 
+och variansen 
+$$
+V[X_i]=E[X_i^2]-p^2=0^2\cdot (1-p)+1^2\cdot p-p^2=p(1-p).
+$$
+Av linjariteten för väntevärde får vi då
+$$
+\textcolor{blue}{E[X]}=E[X_1]+E[X_2]+\dots +E[X_n]=\textcolor{blue}{np}.
+$$
+och under antagande om oberoende får vi variansen 
+$$
+\textcolor{blue}{V[X]}=V[X_1]+V[X_2]+\dots +V[X_n]=\textcolor{blue}{np(1-p)}.
+$$
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Betingat väntevärde (Conditional expectation)*}
+
+\textbf{Definition:} Det betingade väntevärdet för en diskret s.v. $X$ givet att man vet utfallet $Y=y$ betecknas 
+$E[X|Y=y]$ och definieras av
+$$
+E[X|Y=y]= \sum_{x=0}^{\infty}x\cdot p_{X|Y=y}(x).
+$$
+%betecknas $p_{X|Y}(x|y)$ och kallas \textcolor{blue}{betingade sannolikhetsfunktionen}
+%för $X$, givet $Y=y$.
+
+\begin{itemize}
+
+\pause
+\item Antag att de diskreta s.v. $X$ och $Y$ har simultanfördelning enligt följande tabell:
+%Den betingade sannolikhetsfunktionen $p_{X|Y}(x|y)$ fås alltså från simultanfördelningen genom att välja lämplig kolonn (rad vid omvänd betingning) %om man vänder på betingningen 
+%och multiplicera med skalfaktorn $p_Y(y)$ (eller $p_X(x)$ vid omvänd betingning) %om man vänder på betingningen) 
+\begin{center}
+\begin{threeparttable}
+\begin{tabular}{c| c | c |c || c  }
+%\toprule
+            &  $Y=0$ & $Y=1$    &  $Y=2$  & S:a dvs $p_X(x)$
+            \tabularnewline
+\hline
+$X=0$  &    0.15    &   \textcolor{blue}{0.3}       &  0.125     &  0.575 \tabularnewline
+\hline
+$X=1$  &    0.125    &   \textcolor{blue}{0.15}      &    0.15          &  0.425 \tabularnewline
+\hline
+\hline
+S:a dvs $p_Y(y)$  &    0.275    &   \textcolor{red}{0.45}    &  0.275       & \tabularnewline
+
+%\midrule
+ %\hline
+%\bottomrule
+\end{tabular}
+\end{threeparttable}
+\end{center}
+
+
+\pause
+\item
+Den betingade sannolikhetsfunktionen $p_{X|Y=1}(x)$ antar då värdena
+$$
+p_{X|Y=1}(0)=\frac{\textcolor{blue}{0.3}}{\textcolor{red}{0.45}}, \quad p_{X|Y=1}(1)=\frac{\textcolor{blue}{0.15}}{\textcolor{red}{0.45}}.
+$$
+\item Vi får därför från andra kolonnen i tabellen det betingade väntevärdet för $X$ givet utfallet $Y=1$ att
+$$
+E[X|Y=1]=0\cdot \frac{\textcolor{blue}{0.3}}{\textcolor{red}{0.45}}  +1\cdot \frac{\textcolor{blue}{0.15}}{\textcolor{red}{0.45}}=1/3
+$$
+
+\item Från första raden i tabellen får vi det betingade väntevärdet för $Y$ givet utfallet $X=0$, nämligen
+$$
+E[Y|X=0]=0\cdot \frac{0.15}{0.575}  +1\cdot \frac{0.3}{0.575}+2\cdot \frac{0.125}{0.575}\approx 0.74.
+$$
+
+%Grafen till motsvarande betingade sannolikhetsfunktion 
+%$
+%p_{X|Y}(x|1)
+%$
+%markeras med blå färg i nedanstående figur
+%\begin{figure}
+%\includegraphics[scale=0.03]{betingaddiskret}
+%\end{figure}
+%
+%\pause
+%\item Om $X$ och $Y$ är oberoende sammanfaller betingade fördelning med motsvarande marginalfördelning dvs $p_{X|Y}(x|y)=p_X(x)$ .
+
+\end{itemize}
+
+\end{frame}
+
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}
+\frametitle{Centrala gränsvärdessatsen (CGS)}
+
+\textbf{Centrala gränsvärdessatsen (CGS):} Summan av tillräckligt stort antal \emph{likafördelade oberoende} slumpvarabler är normalfördelade!
+
+\bigskip
+Mer precist. Om $X_1,\dots,X_n$ har samma fördelning och är oberoende och
+
+1. $E[X_i]=\mu$, 
+
+2. $V[X_i]=\sigma^2$ 
+
+för alla $1\leq i\leq n$ och $n$ stort (typ $n\geq 20$) så är 
+$$
+X_1+X_2+\dots +X_n\sim N(n\cdot\mu,n\cdot\sigma^2).
+$$
+\pause Galtons experiment: {\small{\url{https://www.youtube.com/watch?v=6YDHBFVIvIs}}}
+
+\begin{figure}
+\includegraphics[scale=0.3]{galtonboard.jpg}
+\end{figure}
+
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Hur många parkeringsplatser?}
+
+\begin{figure}
+\includegraphics[scale=0.3]{parkering.jpg}
+\end{figure}
+
+
+Ett företag ska bygga 100 nya lägenheter. Utifrån erfarenhet från
+liknande områden vet man att sannolikheten är 25\% att ett
+hushåll inte har någon bil, 50\% att ett hushåll har en bil och 25\%
+att ett hushåll har två bilar.
+
+\begin{enumerate}
+
+\item[a)] Uttryck totala antalet bilar $Y$ som funktion av de enskilda hushållens bilar $X_1,\dots,X_{100}$.
+
+\item[b)] Hur många bilar kan man förvänta sig att hushållen har
+tillsammans?
+
+\item[c)] \textbf{Vilken fördelning har $Y$?}
+
+\end{enumerate}
+
+%\pause
+
+%\textbf{c)} \pause Enskilt hushåll $X_i$ har 
+
+%$\mu=E[X_i]=\sum x p(x)=0\cdot 0.25+1\cdot 0.5+ 2\cdot 0.25=1 $ bilar och 
+
+%\pause $\sigma^2=E[X_i^2]-\mu^2=0^2\cdot 0.25+1^2\cdot 0.5+ 2^2\cdot 0.25-1^2=0.5$.
+
+%\pause CGS $\Rightarrow$ $X=X_1+\dots+X_{100}\approx N(100\cdot \mu,100\cdot \sigma^2)=N(100,50)$ 
+
+
+
+%%\pause \textbf{b)} \pause Söker $\alpha$ så att $P(X\leq \alpha) =0.95$  \pause $\Rightarrow \Phi(\frac{\alpha-100}{\sqrt{50}})=0.95$
+
+%%\pause $\Rightarrow z=\frac{\alpha-100}{\sqrt{50}}=1.645$ enligt tabell $\Rightarrow 
+%%\pause \alpha=1.645\cdot \sqrt{50}+100=111.63$ 
+
+%%\pause Så det behövs \pause 112 parkeringsplatser.
+
+%%\pause \textbf{c)} 
+%%\pause $P(X\leq 75)=\pause \Phi(\frac{75-100}{\sqrt{50}})=\pause1-\Phi(3.54)=\pause 1-0.9998=0.0002$.
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Cliffhanger: Centrala gränsvärdessatsen (CGS), Galton board, approximation (spec. diskreta fallet med halvkorrektion) med normalfördelning, och stora talens lag}
+
+\begin{figure}
+\includegraphics[scale=0.3]{galtonboard.jpg}
+\end{figure}
+
+
+%Nästa föreläsning: Mer om centrala gränsvärdessatsen, Galtons experiment, och approximation med normalfördelning, och stora talens lag
+%\url{https://www.youtube.com/watch?v=6YDHBFVIvIs}!
+
+
+\bigskip
+\pause Till räkneövning R6: 501-513 {\large\smiley{}}
+ %409-410, 414-416, 421-424u
+
+\bigskip
+\pause Tack för idag! {\large\sun} {\large\sun} {\large\sun} {\large\sun} {\large\sun} {\large\sun}
+
+
+
+\end{frame}
+
+%\begin{frame}
+%\frametitle{Tyst minut för terrorns offer}
+
+
+%\begin{figure}
+%\includegraphics[scale=2]{terror_blommor.jpg}
+%\end{figure}
+
+
+%\end{frame}
+
+
+
+
+
+\end{document}
+
+
+
+
+\begin{frame}
+\frametitle{Fördelningsfunktion}
+
+Man är ofta intresserad av sannolikheter av typen 
+$$
+P(X \leq k).
+$$
+Av den anledningen så har man infört begreppet fördelningsfunktion.
+\textbf{Fördelningsfunktionen} för stokastiska variabeln $X$ är
+$$
+F(k) = P(X\leq k).
+$$
+\pause För diskreta slumpvariabler som kan anta värdena $0,1,2,\dots k$
+(och eventuellt större värden än $k$) gäller det att
+$$
+F(k) =\sum_{i=0}^k p(i).
+$$
+\pause Allmänt gäller att
+$$
+P(a<X\leq b)=F(b)-F(a).
+$$
+
+\end{frame}
+
+
+
+

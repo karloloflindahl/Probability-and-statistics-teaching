@@ -1,0 +1,1776 @@
+%\documentclass[compress]{beamer}
+
+\documentclass[8pt,hyperref={pdfpagemode=FullScreen}]{beamer}
+%\documentclass[hyperref={pdfpagemode=FullScreen}]{beamer}
+
+\usepackage{amsmath,amssymb,makeidx,amsfonts,latexsym,enumerate,amsthm,tikz,lipsum,schemata,wasysym}
+
+
+%\setbeamercovered{transparent}
+\usepackage{color}
+
+\usepackage{amsmath,amscd,amssymb,amsfonts,graphicx}
+\usepackage{mathrsfs}
+\usepackage{hyperref}
+
+
+%\usepackage{beamerthemeshadow}
+
+%\usetheme{CambridgeUS}
+
+%\useoutertheme{infolines} %alt compress i documentclass
+
+
+
+\usepackage{cite}
+
+%\setbeamertemplate{footline}{\insertframenumber/\inserttotalframenumber}
+
+
+\usepackage[T1]{fontenc}
+\usepackage[swedish]{babel}
+\usepackage[latin1]{inputenc}
+
+\newtheorem{conjecture}{Conjecture}[section]
+\newtheorem{open problem}{Open problem}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{remark}{Remark}[section]
+
+
+
+
+
+
+
+\title{F5 (Tidigare i F6) Tvådimensionella fördelningar: simultanfördelning, marginalfördelning, oberoende stokastiska variabler, betingad fördelning*}
+\subtitle{Tillämpad sannolikhetslära och statistik}
+
+%\subtitle{\noindent[1] L.The size of quadratic $p$-adic linearization disks \textit{Advances in Mathematics}, 2013\\ 
+%\noindent [2] L. \& Rivera-Letelier,  `Optimal cycles and minimally ramified power series', \textit{Composito Mathematica}, 2014}
+
+\author{Karl-Olof Lindahl}
+
+%\institute{Department of Mathematics, Linnaeus University}
+
+\date{}
+
+
+
+%\frame[c]{\titlepage}
+
+
+
+
+\begin{document}
+
+
+
+\maketitle
+
+
+%\begin{frame}
+
+%\frametitle{Innehåll}
+
+%\begin{enumerate}
+
+%%\pause
+%\item\textb{Tvådimensionella fördelningar (simultanfördelning/joint distribution)}
+
+%\item\textb{Marginalfördelning}
+
+%\item\textb{Oberoende stokastiska variabler}
+
+%\item\textb{Betingad fördelning*}
+
+%\item\textb{Tvådimensionell kontinuerlig fördelning*}
+
+
+%\end{enumerate}
+
+%* ej obligatorisk för 1MA511
+
+%\end{frame}
+
+
+
+\begin{frame}
+
+\frametitle{På agendan}
+Tillämpad sannolikhetslära och statistik, \emph{Karl-Olof Lindahl}
+
+\bigskip
+
+\begin{enumerate}
+%\pause
+\item\textb{Tvådimensionella fördelningar (simultanfördelning/joint distribution)}
+
+\item\textb{Marginalfördelning}
+
+\item\textb{\textcolor{blue}{Oberoende stokastiska variabler}}
+
+\item\textb{Betingad fördelning*}
+
+\item\textb{Tvådimensionell kontinuerlig fördelning*}
+
+%\item\textbf{ Kontinuer}
+
+\end{enumerate}
+
+* ej obligatorisk för 1MA511
+
+\end{frame}
+
+
+
+\begin{frame} %#17
+\frametitle{Tvådimensionell stokastisk variabel}
+
+\textbf{Definition:} En tvådimensionell stokastisk variabel är en funktion $(X,Y)$ definierad på ett utfallsrum $\Omega$ och som
+tar värden i $\mathbb{R}^2$. 
+\begin{itemize}
+
+\item Då man man samtidigt studerar två slumpmässigt varierande storheter $X$ och $Y$ får man en tvådimensionell slumpvariabel.
+
+
+\item Till exempel skulle $X$ kunna vara antalet pojkar och $Y$ vara antalet flickor i en slumpvis vald familj.
+%Recall that for a discrete random variable $X$ we define the PMF $p_X(x)=P(X=x)$.
+%som i Gunnar Bloms exempel i \emph{Sannolikhetsteori med tillämpningar}:
+
+\item Den \textcolor{blue}{simultana sannolikhetsfunktionen (joint PDF)} för en diskret tvådimensionell s.v. $(X,Y)$ definieras som
+$$
+p_{X,Y}(x,y)=P(\{X=x\}\cap \{Y=y\})=P(X=x,Y=y),
+$$
+där alla $p_{X,Y}(x,y)\geq 0$ och $\sum_{x}\sum_{y}p_{X,Y}(x,y)=1$.
+%Numeriska värden till den simultana sannolikhetsfunktionen nedan.
+
+\pause
+
+\begin{figure}
+
+%\begin{center}
+\begin{threeparttable}
+\begin{tabular}{c| c | c |c  }
+%\toprule
+            &  $Y=0$ & $Y=1$    &  $Y=2$  
+            \tabularnewline
+\hline
+$X=0$  &    0.15    &   0.3       &  0.125       \tabularnewline
+\hline
+$X=1$  &    0.125    &   0.15      &  0.15        \tabularnewline
+
+%\midrule
+ %\hline
+%\bottomrule
+\end{tabular}
+\end{threeparttable}
+%\end{center}
+
+\hspace{2ex}
+ 
+%\begin{figure}
+%\includegraphics[scale=0.2]{pmfXY.png}
+
+%begin{figure}
+\includegraphics[scale=0.03]{betingaddiskret}
+%\end{figure}
+\end{figure}
+
+\item Exempelvis är $p_{X,Y}(0,1)=0.3$, $p_{X,Y}(1,0)=0.125$ och 
+$$
+\textcolor{lightgray}{F_{X,Y}(1,1)=}P(X\leq 1, Y\leq1)=%\sum_{x\leq 1}\sum_{y\leq 1}p_{X,Y}(x,y)
+0.15+0.3+0.125+0.15=0.725
+$$
+
+
+
+\end{itemize}
+
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Marginalfördelning (Marginal distribution)}
+
+
+\begin{itemize}
+
+\pause
+\item Tagna var för sig är $X$ och $Y$ endimensionella.
+
+\pause
+\item 
+Deras fördelningar kallas \textcolor{blue}{marginalfördelningar}. 
+
+\pause
+\item Motsvarande \textcolor{blue}{marginella sannolikhetsfunktioner} kan uttryckas i termer av simultanfördelningen. Till exempel är 
+$$
+p_X(x)=\sum_{y=0}^{\infty}p_{X,Y}(x,y)=p_{X,Y}(x,0)+p_{X,Y}(x,1)+p_{X,Y}(x,2)+\dots .
+$$
+
+
+\pause
+\item De marginella sannolikhetsfunktionerna för exemplet på föregående sida utgörs av raden längst ner respektive kolonnen längst till höger i följande tabell
+
+\begin{center}
+\begin{threeparttable}
+\begin{tabular}{c| c | c |c || c  }
+%\toprule
+            &  $Y=0$ & $Y=1$    &  $Y=2$  & S:a dvs $\textcolor{blue}{p_X(x)}$
+            \tabularnewline
+\hline
+$X=0$  &    0.15    &   0.3       &  0.125     &  \textcolor{blue}{0.575} \tabularnewline
+\hline
+$X=1$  &    0.125    &   0.15      &  0.15      &  \textcolor{blue}{0.425} \tabularnewline
+\hline
+\hline
+S:a dvs $\textcolor{red}{p_Y(y)}$  &      \textcolor{red}{0.275}    &   \textcolor{red}{0.45}    &    \textcolor{red}{0.275 }      & \tabularnewline
+
+%\midrule
+ %\hline
+%\bottomrule
+\end{tabular}
+\end{threeparttable}
+\end{center}
+\end{enumerate}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Oberoende stokastiska variabler (Independent random variables)}
+
+
+\begin{itemize}
+
+\pause
+\item
+Två stokastiska variabler  $X$ och $Y$ är \textcolor{blue}{oberoende om}
+$$
+P(X=x,Y=y)=P(X=x)\cdot P(Y=y), \quad \text{för alla $(x,y)$ där $p_{XY}(x,y)>0$.} %\forall \text{ } (x,y)\in R_{XY}:=\{(x,y)|p_{XY}(x,y)>0\}.
+$$
+\pause
+\item
+I termer av marginella sannolikhetsfunktionerna $p_X(x)$ och $p_Y(y)$ är detta ekvivalent med
+$$
+p_{X,Y}(x,y)=p_X(x)p_Y(y).
+$$
+\pause
+\item
+I termer av marginella fördelningsfunktioner $F_X(x)$ och $F_Y(y)$ är detta i sin tur ekvivalent med
+$$
+F_{X,Y}(x,y)=F_X(x)F_Y(y).
+$$
+\pause
+\item
+stokastiska variablerna i tidigare exempel är inte oberoende eftersom enligt tabellen nedan 
+\begin{center}
+\begin{threeparttable}
+\begin{tabular}{c| c | c |c || c  }
+%\toprule
+            &  $Y=0$ & $Y=1$    &  $Y=2$  & S:a dvs $p_X(x)$
+            \tabularnewline
+\hline
+$X=0$  &    0.15    &   \textcolor{brown}{0.3}       &  0.125     &  \textcolor{blue}{0.575} \tabularnewline
+\hline
+$X=1$  &    0.125    &   0.15      &  0.15      &  0.425 \tabularnewline
+\hline
+\hline
+S:a dvs $p_Y(y)$  &    0.275    &   \textcolor{red}{0.45}    &  0.275       & \tabularnewline
+
+%\midrule
+ %\hline
+%\bottomrule
+\end{tabular}
+\end{threeparttable}
+\end{center}
+
+har vi
+$$
+%P(X=0,Y=1)=
+p_{X,Y}(0,1)= \textcolor{brown}{0.3} 
+\neq 
+%P(X=0)\cdot P(Y=1)=
+p_X(0)p_Y(1)= \textcolor{blue}{0.575}\cdot  \textcolor{red}{0.45}=0.2565.
+$$ 
+\end{itemize}
+
+\end{frame}
+
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Betingad diskret fördelning (Conditional distribution)*}
+Den \textcolor{blue}{betingade sannolikhetsfunktionen}
+för $X$, givet att vi vet utfallet $Y=y$
+betecknas $p_{X|Y=y}(x)$ och definieras som
+$$
+\textcolor{blue}{p_{X|Y=y}(x)}=P(X=x|Y=y)=\frac{P(X=x,Y=y)}{P(Y=y)}=\textcolor{blue}{\frac{p_{X,Y}(x,y)}{p_Y(y)}}, \quad p_Y(y)>0.
+$$
+ 
+\begin{itemize}
+
+\pause
+\item Betrakta återigen simultanfördelningen från vårt tidigare exempel:
+\begin{center}
+\begin{threeparttable}
+\begin{tabular}{c| c | c |c || c  }
+%\toprule
+            &  $Y=0$ & $Y=1$    &  $Y=2$  & S:a dvs $p_X(x)$
+            \tabularnewline
+\hline
+$X=0$  &    0.15    &   \textcolor{blue}{0.3}       &  0.125     &  0.575 \tabularnewline
+\hline
+$X=1$  &    0.125    &   \textcolor{blue}{0.15}      &    0.15          &  0.425 \tabularnewline
+\hline
+\hline
+S:a dvs $p_Y(y)$  &    0.275    &   \textcolor{red}{0.45}    &  0.275       & \tabularnewline
+
+%\midrule
+ %\hline
+%\bottomrule
+\end{tabular}
+\end{threeparttable}
+\end{center}
+
+
+\pause
+\item
+Den betingade sannolikhetsfunktionen $p_{X|Y=1}(x)$ ges då av värdena
+$$
+p_{X|Y=1}(0)=\frac{\textcolor{blue}{0.3}}{\textcolor{red}{0.45}}, \quad p_{X|Y=1}(1)=\frac{\textcolor{blue}{0.15}}{\textcolor{red}{0.45}}.
+$$
+
+Grafen till motsvarande betingade sannolikhetsfunktion 
+$
+p_{X|Y=1}(x)
+$
+markeras med blå färg i nedanstående figur
+\begin{figure}
+\includegraphics[scale=0.03]{betingaddiskret}
+\end{figure}
+
+\pause
+\item Om $X$ och $Y$ är oberoende sammanfaller betingade fördelning med motsvarande marginalfördelning dvs $p_{X|Y=y}(x)=p_X(x)$ .
+
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Tvådimensionell kontinuerlig fördelning*}
+
+Låt $(X,Y)$ ha täthetsfunktionen
+$$
+f_{X,Y}(x,y)=
+\begin{cases}
+x+y, \quad \text{om } 0<x<1, \text{ } 0<y<1,\\
+0, \quad \text{annars}.
+\end{cases}
+$$
+\pause
+Den marginella täthetsfunktionen för $Y$ är då
+$$
+f_Y(y)=\int_{-\infty}^{{\infty}}f_{X,Y}(x,y)dx=\int_{0}^{{1}}(\textcolor{red}{x}+y)\textcolor{red}{dx}=[\textcolor{red}{\frac{x^2}{2}}+y\cdot\textcolor{red}{x}]_{0}^{1}=\frac{1}{2}+y.
+$$
+\pause
+Den betingade täthetsfunktionen för $X$, givet att $Y=y$, blir då
+$$
+f_{X|Y=y}(x)=\frac{f_{X,Y}(x,y)}{f_Y(y)}=\frac{x+y}{\frac{1}{2}+y}.
+$$
+\begin{figure}
+\includegraphics[scale=0.04]{2dimkont.jpeg}
+\end{figure}
+
+
+\end{frame}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}
+
+Two random variables $X$ and $Y$ are \textbf{\emph{independent}} if
+$$
+P(X=x  \text{ AND } Y=y)=P(X=x)\cdot P(Y=y) \quad \forall \text{ } (x,y)\in R_{XY}:=\{(x,y)|p_{XY}(x,y)>0\}.
+$$
+:
+$$
+P(Y=1|X=0)=\frac{6}{13}\neq P(Y=1)=\frac{5}{12}.
+$$ 
+
+
+\end{frame}
+
+
+
+\begin{frame} %#13
+\frametitle{Expected Values (Section 7.4.1--7.4.5)}
+
+Problem: 
+Assume that we know that 15\% of all couples in a certain age group have no kid, 
+25 \% have 1 kid and 40\% have 2 kids and $20\%$ have 3 kids.
+How many kids do a couple in this age group have on average?
+
+\bigskip
+\pause
+Let $X$ be a discrete RV with range $R_X=\{x_1,x_2,\dots\}$.
+Then the  \textbf{\emph{expectation}} of $X$, denoted by $E[X]$, is defined as
+$$
+E[X]=\sum_{x_k\in R_X}x_k\cdot p_X(x_k).
+$$
+
+\pause
+Question 1: what is $E[X]$ when $X$ is the result of a single throw with a fair six-sided dice?
+
+\pause
+\bigskip
+Question 2: what is $E[X]$ when $X\sim Bin(n,p)$?
+
+\pause
+\bigskip
+Question 3: what is $E[X]$ when $X\sim Geometric(p)$? 
+
+(Requires calculus $\sum_{k=1}^{\infty}kx^{k-1}=1/(1-x)^2$.)
+
+%\bigskip\pause
+
+%\begin{theorem}
+%Let  $X\sim Bin(n,p)$. Then $E[X]=n\cdot p.$
+%\end{theorem}
+ 
+
+\end{frame}
+
+
+
+
+\begin{frame}%#14
+\frametitle{Linearity of Expectations (Section 7.4.3)}
+
+\begin{theorem}
+Let $a$ and $b$ be real numbers and $X_1$ and $X_2$ be a discrete RV.
+Then
+\begin{enumerate} 
+\item$E[X_1+X_2]=E[X_1]+E[X_2]$, and
+
+\item $E[aX+b]=aE[X]+b.$
+\end{enumerate}
+\end{theorem}
+
+
+\begin{lemma}
+Suppose that $X\sim Bernoulli(p)$. Then $E[X]=p$.
+\end{lemma}
+
+
+\begin{theorem}[Expectation Binomial Distribution]
+Suppose that  $X\sim Bin(n,p)$. Then $E[X]=n\cdot p.$
+\end{theorem}
+
+\begin{theorem}[Expectation Geometric Distribution]
+Suppose that  $X\sim Geometric(p)$. Then $E[X]=1/p.$
+\end{theorem}
+
+\end{frame}
+
+
+\begin{frame}%#18
+
+
+
+\frametitle{Variance}
+
+Let $X$ be a discrete random variable with expectation $E[X]=\mu$. 
+%Let $X$ be a discrete RV with range $X(\Omega)=\{x_1,x_2,\dots\}$.
+Then the  \textbf{\emph{variance}} of $X$, denoted by $V[X]$, is defined as
+$$
+V[X]=E[(X-\mu)^2] %=\sum_{x_k\in X(\Omega)}x_k-\cdot p_X(x_k).
+$$
+
+\begin{theorem}
+Let $X$ be a discrete RV. Then, $V[X]=E[X^2]-(E[X])^2$.
+\end{theorem}
+
+\pause
+\bigskip
+Question: what is $V[X]$ when $X$ is the result of a single throw with a fair six-sided dice?
+
+%\pause
+%\bigskip
+%Question 2: what is $E[X]$ when $X\sim Bin(n,p)$?
+
+\bigskip\pause
+
+\begin{theorem}[Bienayme´s formula]
+Let $X$ and $Y$ be independent random variables.
+%\footnote{In fact we have not defined this concept in the lecture. It is not rigorously defined in the book of Rosen. A rigorous definition will given in %the course on Probability and Statistics.}
+%on a sample space $\Omega$.
+Then $V(X+Y)=V(X)+V(Y)$\footnote{It might be tempting to conjecture that $V$ is linear for independent RV:s but the observation that 
+$V[aX]=a^2V[X]$ shows that this is not the case. Moreover, if $b$ is a real number then $V[b]=0$}.
+
+\end{theorem}
+
+\begin{theorem}[Variance Binomial Distribution]
+Let  $X\sim Bin(n,p)$. Then $V[X]=npq.$
+\end{theorem}
+\end{frame}
+
+\begin{frame} %#19
+\frametitle{Chebychev's Inequality}
+
+
+\begin{theorem}
+Let $X$ be a RV on a sample space $\Omega$ with probability mass function $p_{X}.$ If $r$ is a positive real number, then for every $\omega$
+in $\Omega$ we have
+$$
+p_X(|X(\omega)-E(X)|\geq r)\leq V(X)/r^2.
+$$
+\end{theorem}
+
+\end{frame}
+
+
+
+
+%\begin{frame}
+%\frametitle{Slumpvariablel}
+%
+%En \textbf{slumpvariabel}, ofta betecknad $X$, associerar ett tal till varje möjligt 
+%utfall av ett försök vars resultat inte är givet på förhand.
+
+%Exempel:
+
+%\begin{enumerate}
+
+%\pause\item Man slår en tärning. $X=$antalet ögon.
+
+%\pause\item Man undersöker 100 komponenter. $X=$antalet defekta
+%komponenter.
+
+%\pause\item Man undersöker antal driftstopp. $X=$antalet driftstopp längre än 10 min
+%under en dag. 
+
+%\pause\item Man mäter nötningen på ett borrstift. $X=$den uppmätta nötningen.
+
+%\end{enumerate}
+
+%\bigskip\pause Slumpvariabeln $X$ är \textbf{diskret} om den bara kan anta speciella värden
+%på den skala som används, normalt bara heltalsvärden. 
+%Diskreta stokastiska variabler beskriver ofta antal.
+
+%\pause $X$ är diskret i ex 1-3 ovan, i ex 4 är $X$ \underline{inte} diskret utan \textbf{kontinuerlig}.
+
+%%\bigskip\pause Sannolikheten att $X$ antar olika värden bestäms av dess fördelning.
+%%Fördelningen beskrivs av \textbf{sannolikhetsfunktionen} $p(k) = P(X = k)$.
+%%\pause
+
+
+%\end{frame}
+
+
+
+
+
+
+
+
+
+\begin{frame}
+\frametitle{Diskret stokastisk variabeloch stolpdiagram}
+\begin{figure}
+\includegraphics[scale=0.5]{driftpoisson.eps}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Histogram och kontinuerliga stokastiska variabler}
+
+Kontinuerlig stokastisk variabel$X$ antar värden $x$ som är decimaltal
+
+%\begin{table}
+%\resizebox{\textwidth}{!}{%
+%\begin{tabular}{l | c c c c c c}
+%Test & 1 & 2 & 3 & 4 & 5 j& 6\\
+%\hline
+%Borrmeter ($m$) &   44.0 &  123.2  &   66.7 &  122.7  &  69.4 & 92.0\\
+%
+%Nötning ($\mu m$) & 1201.20 & 6504.96 &  2101.05 & 4797.57 & 2803.76 & 3597.20\\
+%\hline
+%\end{tabular}
+%}
+%\end{table}
+
+\begin{figure}
+%\includegraphics[scale=0.35]{borr_hist.eps}
+\includegraphics[scale=0.65]{histogram_windspeed.jpg}
+\end{figure}
+
+
+%\begin{figure}
+%\includegraphics[scale=0.5]{histogram_windspeed.jpg}
+%\end{figure}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Histogram $\rightarrow $ täthetsfunktion för kontinuerlig slumpvariablel}
+
+\begin{figure}
+\includegraphics[scale=0.35]{weibull_histkurva.jpg}
+\end{figure}
+
+
+Histogrammet har skalats så att rektanglarnas sammanlagda area är 1.
+
+\bigskip\pause
+Andelen observationer som hamnat i ett visst intervall är då lika med
+arean för intervallets rektangel.
+
+\bigskip\pause
+Om vi har väldigt många observationer så kan vi rita ett histogram
+med tunna rektanglar.
+
+%Se tavlan!
+
+\bigskip\pause Kan en funktion beskriva histogrammets form? 
+Vilka villkor måste en sådan funktion uppfylla?
+
+%Se tavlan 
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Täthetsfunktion (PDF-\textit{probability density function}) och sannolikheter}
+
+\textcolor{blue}{Definition:} En reell-värd funktion $f:\mathbb{R}\to\mathbb{R}$ sådan att
+\begin{enumerate}
+    \item $f(x)\geq 0$ för alla reella tal $x\in \mathbb{R}$, och
+
+    \item $\int_{-\infty}^{\infty}f(x)dx=1$
+\end{enumerate} 
+kallas för en \textcolor{blue}{täthetsfunktion} (probaility density function (PDF)).
+
+%Det finns oändligt många sådana funktioner, men i praktiken så är
+%det bara ett fåtal som är intressanta för tillämpningar!
+
+\bigskip\pause
+Om $X$ är en kontinuerlig stokastisk variabelså är \textcolor{blue}{$f_X$ täthetsfunktion till $X$ om sannolikheten}
+att $X$ antar värde i intervall $[a,b]$ är
+$$
+P(a<X\leq b)=\int_{a}^{b}f_X(x)dx,
+$$
+för alla möjliga intervall $[a,b]$.
+
+\bigskip\pause
+Obs! $P(X=a)=0$ för alla värden på $a$ så för kontinuerliga s.v. är alltid
+$$
+P(X\leq a)=P(X<a).
+$$
+
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+\includegraphics[scale=0.08]{kvadratisktathet.jpg} 
+\end{figure}
+\end{frame}
+
+\begin{frame}
+Låt $X$ var den stokastisk variabelvars täthetsfunktion är
+$$
+f_X(x)=
+\begin{cases}
+\frac{3}{2}x^2,  \quad -1 \leq  x\leq 1,\\
+0 \quad\quad\quad  \text{f.ö.}
+\end{cases}
+$$
+Man gör ett experiment. Bestäm sannolikheten att utfallet blir att $X$ antar ett värde i intervallet $-0.25 < x < 0.75$.
+
+\bigskip
+Lösning:
+
+\pause
+\begin{figure}
+\includegraphics[scale=0.045]{kvadratarea.jpeg} 
+\end{figure}
+
+
+\pause
+\begin{equation*}
+\begin{split}
+P(-0.25< X<0.75)&=\int_{-0.25}^{0.75}\frac{3}{2}x^2dx=\frac{3}{2}\left[\frac{1}{3}x^3\right]_{-0.25}^{0.75}\\
+&=\frac{1}{2}\left[x^3\right]_{-0.25}^{0.75}
+=\frac{1}{2}[\frac{27}{64}-(-\frac{1}{64})]=\frac{1}{2}\cdot\frac{28}{64}=\frac{7}{32}(\approx 0.22).
+\end{split}
+\end{equation*}
+\end{frame}
+
+
+%\begin{frame}
+%\frametitle{Sannolikhet - area - massa: Kontinuerlig vs diskret}
+
+%\begin{figure}
+%\includegraphics[scale=0.085]{tathet.jpg} 
+%\end{figure}
+%
+%\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Exponentialfördelning (Weibull med $b=1$)}
+
+
+%Vi såg tidigare hur Weibullfordelningen kan användas för att
+%modellera  vindhastighet. Den används också för exempelvis
+%hållfasthet och livslängder.
+
+%\bigskip
+%Det viktigaste (och matematiskt enklaste) specialfallet $b=1$ av
+%Weibullfordelningen är exponentialfordelningen, som ofta används
+%for att \textbf{modellera tider mellan oberoende händelser som inträffar med en
+%konstant intensitet} $1/a$. (Jfr med diskreta Poissonfördelningen som modellerar antalet oberoende händelser
+%med konstant intensitet över ett givet tidsintervall!)
+
+%\bigskip
+Slumpvariabeln $X$ är \textcolor{blue}{exponentialfördelad} med parameter $a$,
+betecknat \textcolor{blue}{$X\sim Exp(a)$} om dess \textcolor{blue}{täthetsfunktion} är
+%$$
+%\textcolor{blue}{f _X(x) =\frac{1}{a}e^{-\frac{x}{a}}; \quad \text{för $x\geq 0$  och $0$ för övriga värden på $x$}.}
+%$$
+\begin{figure}
+\includegraphics[scale=0.05]{exponentialfordel.jpeg} 
+\end{figure}
+%\pause Vi har $E[X] = a$ och $V[X] = a^2$. Dessa beräknas med partialintegration:
+Vi kontrollerar att $f_X$ är en täthetsfunktion
+\pause
+\begin{equation*}
+\begin{split}
+\int_{-\infty}^{\infty} f_X(x)dx &=\int_{-\infty}^{0} 0 dx+\int_{0}^{\infty} \frac{1}{a}e^{-\frac{1}{a}x}dx\\                                         
+                                                      &=0+[-e^{-\frac{1}{a}x}]_0^{\infty}=-(\lim_{x\to\infty} e^{-\frac{1}{a}x})-(- e^{-0})=1
+\end{split}
+\end{equation*}
+
+Det var allt  för denna del!  {\large\sun} {\large\sun} {\large\sun} {\large\sun}
+\end{frame}
+
+
+
+\begin{frame}
+
+\frametitle{På agendan}
+Tillämpad sannolikhetslära och statistik, \emph{Karl-Olof Lindahl}
+
+\bigskip
+
+\begin{enumerate}
+
+
+
+%\pause
+\item\textbf{Fördelningsfunktion för kontinuerliga stokastiska variabler}
+
+\item\textbf{Kvantiler}
+
+%Del 2
+
+%\pause
+%\item\textbf{Räkna med normalfördelning}
+
+%\pause\item\textbf{Normalisering av normalfördelning}
+
+%\pause\item\textbf{Tips från en bläckfisk}
+
+%\pause
+%\item\textbf{Fördelningsfunktion diskreta stokastiska variabler}
+
+%\pause
+
+
+
+%\pause\item\textbf{Fördelningsfunktion}
+
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+%\frametitle{Fördelningsfunktion (`Cumulative distribution function' - cdf)  - att summera sannolikheter upp till ett visst värde}
+
+\textcolor{blue}{Fördelningsfunktionen (Cumulative distribution function CDF)} till en kontinuerlig stokastisk variabel$X$ med täthetsfunktion $f_X(x)$ definieras som
+$$
+F_X(x):=P(X\leq x)=\int_{-\infty}^{x}f_X(t)dt.
+$$
+%\begin{enumerate}
+
+%\pause \item[A.]Bestäm fördelningsfunktionen för den stokastisk variabel$X$ som har täthetsfunktionen $f$ där $f(x)=\frac{3}{7}x^2$ för $x\in[1,2]$ och $f(x)=0$ f.ö.
+
+%\pause \item[B.] Bestäm fördelningsfunktionen för den exponentialfördelade slumpvariabeln $X\sim Exp(5)$?\\
+
+%\end{enumerate}
+
+
+\begin{figure}
+\includegraphics[scale=0.045]{fordel.jpeg}
+\end{figure}
+\begin{enumerate}
+
+\pause\item $F_X(-\infty)= 0$ och $F_X(\infty)=1$
+
+
+\pause\item $F_X(x)$ är växande och antar värden i intervallet $[0,1]$
+
+%\pause\item På engelska kallas $F$ cumulative distribution function (cdf) eftersom den summerar sannolikheten upp till ett visst värde på x.
+
+\pause\item $P(a<X\leq b)=F_X(b)-F_X(a)$.
+
+
+\pause\item I deriverbara fall är $\frac{dF_X(x)}{dx}=f_X(x)$. % primitiv funktion till täthetsfunktionen $f_X(x)$ % (integralkalkylens huvudsats för fallet då $f$ är deriverbar för alla $x$ på reella axeln)
+
+\pause\item Om $X\sim Exp(a)$ blir
+$
+F_X(x)=\int_{0}^x\textcolor{red}{\frac{1}{a}e^{-\frac{1}{a}t}}dt=[-e^{-\frac{1}{a}t}]_0^{x}=\textcolor{blue}{1-e^{-\frac{1}{a}x}}
+$
+för $x\geq 0$ och $F_X(x)=0$ för $x<0$.
+\end{enumerate}
+
+
+\end{frame}
+
+
+
+\begin{frame}
+%$X\sim Exp(a)$ medför att
+%$
+%F_X(x)=\int_{0}^x\textcolor{red}{\frac{1}{a}e^{-\frac{1}{a}t}}dt=[-e^{-\frac{1}{a}t}]_0^{x}=\textcolor{blue}{1-e^{-\frac{1}{a}x}}.
+%$
+\begin{figure}
+\includegraphics[scale=0.08]{tathetfordelexp.jpeg}
+\end{figure}
+
+
+\end{frame}
+
+
+%\begin{frame}
+%
+%\begin{figure}
+%\includegraphics[scale=0.08]{tathetfordel.jpeg}
+%\end{figure}
+
+
+%\end{frame}
+
+
+\begin{frame}
+\textcolor{blue}{Låt $X$ var den stokastisk variabelvars täthetsfunktion är
+$$
+f_X(x)=
+\begin{cases}
+\frac{3}{2}x^2,  \quad -1 \leq  x\leq 1,\\
+0 \quad\quad\quad  \text{f.ö.}
+\end{cases}
+$$
+Bestäm fördelningsfunktionen till $f_X$.}
+
+
+\bigskip
+Lösning:
+
+\pause
+%\begin{figure}
+%\includegraphics[scale=0.045]{kvadratarea.jpeg} 
+%\end{figure}
+För  $x<-1$ har vi $F_X(x)=0$. 
+
+\bigskip 
+\pause
+För $x$ i intervallet $-1\leq x\leq 1$ får vi  
+\begin{equation*}
+\begin{split}
+P( X\leq x)&=\int_{-1}^{x}\frac{3}{2}t^2dt=\frac{3}{2}\left[\frac{1}{3}t^3\right]_{-1}^{x}\\
+&=\frac{1}{2}\left[t^3\right]_{-1}^{x}
+=\frac{1}{2}[x^3-(-1)]=\frac{1}{2}(x^3+1).
+\end{split}
+\end{equation*}
+\pause
+För $X>1$ har vi $F_X(x)=1$. 
+
+\bigskip
+\pause
+Fördelningsfunktionen $F_X(x)$ är alltså den kontinuerliga styckvis definierade funktionen
+$$
+F_X(x)=
+\begin{cases}
+0,  \quad x<-1,\\
+\frac{1}{2}(x^3+1), \quad -1\leq x\leq 1,\\
+1, \quad x>1.
+\end{cases}
+$$
+
+\end{frame}
+
+\begin{frame}
+
+\begin{figure}
+\includegraphics[scale=0.06]{tathetfordelkvadrat.jpeg}
+\end{figure}
+
+
+\end{frame}
+
+
+
+%\begin{frame}
+%Ett mätinstrument anses ha en livslängd som är exponentialfördelad med väntevärde 5 (enhet:hundratals timmar). 
+%Till ett laboratorium beställs ett stort antal instrument.
+%\begin{enumerate}
+%\pause\item[a)] Hur stor andel av instrumenten kan förväntas hålla mindre än 400 timmar?
+%\pause\item[b)] Hur stor andel av instrumenten kan förväntas hålla åtminstone 600 timmar?
+%\pause\item[c)] Till en avdelning köper man 3 instrument. Vad är sannolikheten att alla tre har en livslängd mellan 400 och 600 timmar?
+
+%\end{enumerate}
+
+%\end{frame}
+
+\begin{frame}
+\frametitle{Kvantiler}
+
+För stokastisk variabel$X$ och $0<\alpha<1$ definieras \textbf{$\alpha$-kvantilen} som en lösning $x=x_{\alpha}$ till ekvationen
+$$
+F_X(x)=1-\alpha.
+$$
+\pause För kontinuerliga $X$ är då
+$$
+\int_{-\infty}^{x_{\alpha}}f_X(x)dx=1-\alpha.
+$$
+\begin{figure}
+\includegraphics[scale=0.04]{alfakvantil.jpeg}
+\end{figure}
+
+\pause
+Om $X\sim Exp(2)$ blir $0.05$-kvantilen lösningen till $F_X(x)=0.95$ vilket ger 
+$$
+1-e^{-\frac{1}{2}x}=0.95
+$$ 
+dvs $\frac{1}{2}x=\ln(1/0.05)=-\ln(0.05)$. Så $x_{0.05}=-2\ln(0.05)$ om $X\sim Exp(2)$. 
+
+
+\bigskip
+%\pause 
+Det var allt för denna del! {\large\sun} {\large\sun} {\large\sun} {\large\sun} 
+\end{frame}
+
+
+\begin{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\frametitle{På agendan}
+Tillämpad sannolikhetslära och statistik, \emph{Karl-Olof Lindahl}
+
+\bigskip
+
+\begin{enumerate}
+
+
+
+%\pause
+%\item\textbf{Fördelningsfunktion för kontinuerliga stokastiska variabler}
+
+%\item\textbf{Kvantiler}
+
+%Del 2
+
+%\pause
+
+
+\item
+\textbf{Normalfördelning: täthetsfunktion och fördelningsfunktion}
+
+
+\item
+\textbf{Räkna med normalfördelning med hjälp av tabellvärden}
+
+%\pause
+\item
+\textbf{Normalisering av normalfördelning}
+
+%\pause\item\textbf{Tips från en bläckfisk}
+
+%\pause
+%\item\textbf{Fördelningsfunktion diskreta stokastiska variabler}
+
+%\pause
+
+
+
+%\pause\item\textbf{Fördelningsfunktion}
+
+\end{enumerate}
+
+
+
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Normalfördelning}
+
+
+Modellera mätfel, brus, variation i storlek, olika finansvariabler etc.
+
+Slumpvariabeln $X$ är \textbf{normalfördelad} med parametrar $\mu$ och $\sigma$,
+betecknat $X\sim N\left(\mu,\sigma^2\right)$ om dess täthetsfunktion är
+$$
+f _X(x) =\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}},
+\quad \text{för $-\infty< x < \infty$}.
+$$
+
+%För normalfordelningen gäller att
+
+$E[X] = \mu$
+
+$V[X] = \sigma^2$, och
+
+%\bigskip\pause
+%och
+%$$
+%P(\mu  - 2\sigma<X <\mu  + 2\sigma)=0.95.
+%$$
+
+\begin{figure}
+\includegraphics[scale=0.7]{normal.jpg}
+\end{figure}
+
+\begin{itemize}
+\item Det finns ingen formel för fördelningsfunktionen till normalfördelningen. {\large\frownie{}}
+\item Det finns väldigt precisa numeriska beräkningar för värdena på fördelningsfunktionen $\Phi(z)$ till $Z\sim N(0,1)$. {\large\smiley{}}
+\item Värdena finns uträknade i tabell i formelsamlingen (alt. ges de av miniräknare eller datorprogram).
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+%\frametitle{Centralt exempel: Normalfördelning $Z\sim N(0,1)$}
+
+\textcolor{blue}{Standardiserad  normalfördelning $Z\sim N\left(0,1)$ har täthetsfunktion 
+$$
+f _Z(z) =\frac{1}{\sqrt{2\pi}}e^{-\frac{z^2}{2}},
+\quad \text{för $-\infty< z < \infty$}.
+$$
+}
+%\begin{enumerate}
+
+
+
+%\pause
+%\item Fördelningsfunktionen för normalfördelning $Z\sim N(0,1)$ betecknas med $\Phi(z)$.
+
+
+\begin{figure}
+\includegraphics[scale=0.0372]{normalnollett.jpeg}
+\pause\hspace{2ex}
+\includegraphics[scale=0.039]{tabellnormal.jpeg}
+\end{figure}
+
+\pause Eftersom täthetsfunktionen för $ N(0,1)$ är symmetrisk kring $\mu=0$  så är 
+$$
+\Phi(-z)=1-\Phi(z).  \quad {\large\smiley{}}
+$$ 
+%\pause
+%\item Det finns ingen formel för $\Phi(x)$. {\large\frownie{}}
+
+%\pause
+%\item 
+%Numeriskt framräknade värden för $\Phi(z)$ för olika värden för $z\geq 0$ finns givna i tabellen i slutet av boken. {\large\smiley{}}
+
+%\pause
+%\item Tabellvärdena gäller bara fallet $X\sim N(0,1)$  {\large\frownie{}}
+
+%\textbf{Beräkna $P(X<1)$ då $X\sim N(0,1)$.} \pause\textbf{Beräkna $P(X<2)$ då $X\sim N(0,1)$.} 
+%\pause\textbf{Beräkna $P(X>2)$ då $X\sim N(0,1)$.} 
+
+\begin{itemize}
+\pause
+\item
+$
+P(Z\leq 0.5)=\Phi(0.5)=0.6915
+$
+
+
+
+\pause
+\item
+$
+P(Z\leq 0.54)=\Phi(0.54)=0.7054
+$
+
+
+\pause
+\item
+$
+P(Z<1)=\Phi(1)=0.8413
+$
+
+\pause
+\item
+$
+P(Z\geq 1)=1-P(Z<1)=1-\Phi(1)=1-0.8413=0.1587
+$
+
+\pause
+\item
+$
+P(0.5<Z<1)=\Phi(1)-\Phi(0.5)=0.8413-0.6915=0.1498
+$
+
+\pause
+\item $0.05$-kvantilen
+$
+z_{0.05}\approx 1.645
+$
+
+(motsvarar $z$-värdet i tabellen för vilket $\Phi(z)\approx1-0.05= 0.95$)
+\end{itemize}
+
+
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Normalfördelningar kan normaliseras till den standardiserade $N(0,1)$}
+
+%\begin{enumerate}
+
+\pause
+%\item 
+Om $X\sim N(\mu,\sigma^2)$ så kan $X$, enligt räknelagarna för väntevärde och varians, 
+
+
+\begin{figure}
+\includegraphics[scale=0.5]{normal.jpg}
+\end{figure}
+
+
+\textbf{normaliseras} till 
+$$
+Z=\frac{X-\mu}{\sigma}\sim N(0,1).
+$$
+
+
+
+
+\bigskip
+\pause
+%\item 
+Om $X\sim N(\mu,\sigma^2)$ så kan man alltså använda $\Phi(z)$ för att beräkna
+$$
+P(X\leq x)=\Phi(\frac{x-\mu}{\sigma}). \quad {\large\smiley{}}
+$$
+
+\bigskip
+
+\begin{itemize}
+
+\item Om $X\sim N(\textcolor{blue}{1},\textcolor{red}{4})$ så blir $P(X\leq 3)=\Phi(\frac{3-\textcolor{blue}{1}}{\textcolor{red}{2}})=\Phi(1)=0.8413$
+
+\end{itemize}
+
+
+%\end{enumerate}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Normalfördelning in action}
+
+%\textcolor{blue}{
+Diametern $X$ för vissa kullagerkulor kan anses vara normalfördelad. Man vet att 9\% av diametrarna understiger 20.30 och att 9 \% överstiger 20.78 mm.
+\begin{enumerate}
+\pause\item[a)] Bestäm väntevärdet och standardavvilkelsen för $X$.
+\pause\item[b)] Hur stor andel av kulorna har en diameter understigande 20.25?
+\end{enumerate}
+%}
+
+\bigskip
+Lösning:
+
+%\bigskip
+\pause
+a) Av symmetriskäl är väntevärdet $\mu=(20.78+20.30)/2=\textcolor{blue}{20.54}.$
+
+%\bigskip
+\pause
+Vi vet också att $P(X\leq 20.78)=1-0.09=0.91$. Detta ger oss ekvationen
+$$
+\Phi(\frac{20.78-\textcolor{blue}{20.54}}{\sigma})=0.91
+$$
+\pause
+Enligt tabell inträffar detta för $z=1.34$ vilket ger $\sigma=(20.78-\textcolor{blue}{20.54})/1.34\approx \textcolor{red}{0.1791}.$
+\begin{figure}
+\includegraphics[scale=0.035]{tabellnormal.jpeg}
+\end{figure}
+b) $P(X\leq 20.25)=\Phi(\frac{20.25-\textcolor{blue}{20.54}}{\textcolor{red}{0.1791}})\approx\Phi(-1.62)=1-\Phi(1.62)=1-0.9474=0.0526.$
+
+\end{frame}
+
+\begin{frame}
+
+\frametitle{På agendan}
+Tillämpad sannolikhetslära och statistik, \emph{Karl-Olof Lindahl}
+
+\bigskip
+
+\begin{enumerate}
+
+
+
+%\pause
+%\item\textbf{Fördelningsfunktion för kontinuerliga stokastiska variabler}
+
+%\item\textbf{Kvantiler}
+
+%Del 2
+
+%\pause
+
+
+\item
+\textbf{Väntevärde och varians för kontinuerliga stokastiska variabler (Expectation and Variance)}
+
+\item
+\textbf{Slumptal och likformig fördelning}
+
+
+\item
+\textbf{Weibullfördelning}
+
+\item
+\textbf{Tid mellan oberoende händelser med konstant intensitet}
+
+\item
+\textbf{Exponentialfördelning}
+
+
+%\pause
+\item
+\textbf{Normalfördelning}
+
+%\pause\item\textbf{Tips från en bläckfisk}
+
+%\pause
+%\item\textbf{Fördelningsfunktion diskreta stokastiska variabler}
+
+%\pause
+
+
+
+%\pause\item\textbf{Fördelningsfunktion}
+
+\end{enumerate}
+
+
+
+\end{frame}
+
+
+\begin{frame}
+
+\frametitle{Väntevärde och varians}
+
+Antag att $X$ är \emph{kontinuerlig} med täthetsfunktion $f_{X}(x)$. 
+
+%Till varje möjligt utfall associeras en sannolikhet $p(x)=P(X=x)$.  
+%(dvs till varje m)och kan anta värdena $k=1,2,\dots $, vart och ett med associerad sannolikhet  $p(X=x_1),\dots, p(X=x_n)$.
+
+
+\bigskip
+\noindent \textbf{Väntevärdet} för $X$ är då
+ $$
+ \mu=E[X]:=\int_{-\infty}^{\infty} x\cdot f_X(x)dx.
+ $$
+\pause Statistiskt: Jämför med \emph{medelvärdet} för stickprov.
+
+\pause Fysik: Jämför med \emph{tyngdpunkt} för massa.
+
+
+\pause %I termer av massa: 
+$$f_X\sim \text{ \emph{densitet}},$$ 
+$$\mu\sim \text{ \emph{förväntat genomsnitt från upprepade försök}}.$$ 
+
+%\bigskip
+\pause\noindent \textbf{Variansen} för $X$ är då
+ $$
+ \begin{split}
+ \sigma^2=V[X]&:=E[(X-\mu)^2]=\int_{-\infty}^{\infty} (x-\mu)^2\cdot f_X(x)dx\\
+             &=\int_{-\infty}^{\infty} x^2\cdot f_X(x)dx-\mu^2
+             = E[X^2]-\mu^2.
+ \end{split}
+ $$
+
+%\bigskip
+\pause\noindent \textbf{Standardavvikelsen} för $X$ är då
+ $
+ \sigma=\sqrt{\sigma^2}.
+ $
+
+
+\pause Statistiskt: Jämför (stickprovs)variansen $s^2$ och standardavvikelsen $s$.
+
+
+\pause %I termer av massa är standardavikelsen: 
+$\sigma\sim$ förväntat \emph{medelavstånd} till väntevärdet för slumpvis valt $x$.
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Likformig fördelning (rektangelfördelning)}
+
+Om slumpvariabeln $X$ antar alla värden i ett intervall $[a,b]$ 
+'med samma sannolikhet' så sägs $X$ vara likformigt fördelad på
+intervallet.
+
+\bigskip
+Kodbeteckning: \textcolor{blue}{$X \sim Re(a,b)$}.
+\textcolor{blue}{Täthetsfunktionen} är rektangelformad:
+$$
+\textcolor{blue}{f _X(x) =\frac{1}{b-a}, \quad a\leq x \leq b, \quad f(x)=0 \text{ f.ö.}}
+$$
+
+%Se bild pa tavlan!
+
+\bigskip\pause
+Exempel: 
+
+Generering av slumptal mellan 0 och 1 antas vara $Re(0,1)$. 
+
+%Hur länge man får vänta på bussen.
+
+\bigskip\pause För likformig fördelning gäller (se nästa sida för bevis)
+
+\begin{itemize}
+
+\item Väntevärde $E[X] = (a + b)/2$
+
+\item Varians $V[X] =\frac{ (b-a)^2}{12}$
+
+\end{enumerate}
+
+%Se bussexempel pa tavlan!
+
+
+
+\end{frame}
+
+
+\begin{frame}
+\begin{figure}
+\includegraphics[scale=0.085]{rektangel.jpg}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Weibull - Matematisk modell för hållfasthet, livslängd kullager, vindhastighet mm}
+
+\begin{figure}
+\includegraphics[scale=0.35]{weibull_histkurva.jpg}
+\end{figure}
+
+\textbf{Weibullfördelningen} har täthetsfunktion och fördelningsfunktion enligt
+$$
+f_X (x) =
+\frac{b}{a}\left (\frac{x} {a}\right)^{b-1}e^{-(x/a)^{b}}, \quad x\geq 0, \quad F_X(x)=1-e^{-(x/a)^{b}}, \quad x\geq 0,
+$$
+där $a>0$ (skalparameter)  och $b>0$ (formparameter).
+Funktionen får olika utseende när man ändrar parametrarnas
+värden: 
+\pause $b<1$  intensiteten (av misslyckande) minskar över tid; ex stor `barnadödlighet'. 
+\pause $b=1$ konstant intensitet; ex. slumpen största dödsorsak (se exponentialfördelning). 
+\pause $b>1$ intensiteten av misslyckande ökar med tiden; ex. `åldringsprocess' pch
+funktionen är först konkav, sedan konvex med inflexionspunkt i $(e^{1/b}-1)/e^{1/b}$.
+\hline
+
+\pause Finns det några värden på $a$ och $b$ som ger en kurva som passar
+givna data från figuren?
+Via statistiska metoder (som vi ännu inte känner till) kan man
+komma fram till att $a = 0.9 $ och $b = 1.7$ ger en `bra' kurva.
+
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Tid mellan händelser}
+
+\begin{figure}
+\includegraphics[scale=0.3]{tid.png}
+\end{figure}
+
+\begin{enumerate}
+\pause\item Hur lång tid går det mellan det att man tänder en glödlampa
+och att den går sönder? (Hur lång är livslängden?)
+
+\pause\item Hur lång tid går det mellan att två samtal ankommer till en
+telefon?
+
+\pause\item Hur lång tid går det mellan två jordskalv?
+
+\pause\item Hur lång tid går det mellan två driftstopp i en fabrik?
+
+\pause\item  Hur lång tid går det mellan två mål i en fotbollsmatch?
+\end{enumerate}
+
+\end{frame}
+
+
+%\end{document}
+
+\begin{frame}
+\frametitle{Exponentialfördelning}
+
+
+Vi såg tidigare hur Weibullfordelningen kan användas för att
+modellera hållfasthet. Den används också för exempelvis
+vindhastigheter och livslängder.
+
+%\bigskip
+Det viktigaste (och matematiskt enklaste) specialfallet $b=1$ av
+Weibullfordelningen är exponentialfordelningen, som ofta används
+for att \textbf{modellera tider mellan oberoende händelser som inträffar med en
+konstant intensitet} $1/a$. (Jfr med diskreta Poissonfördelningen som modellerar antalet oberoende händelser
+med konstant intensitet över ett givet tidsintervall!)
+
+\bigskip
+Slumpvariabeln $X$ är exponentialfordelad med parameter $a$,
+betecknat \textcolor{blue}{$X\sim Exp(a)$} om dess \textcolor{blue}{täthetsfunktion} är
+$$
+\textcolor{blue}{f _X(x) =\frac{1}{a}e^{-\frac{x}{a}}; \quad \text{för $x\geq 0$  och $0$ för övriga värden på $x$}.}
+$$
+
+\pause Vi har $E[X] = a$ och $V[X] = a^2$. Dessa beräknas med partialintegration:
+
+\pause
+\begin{equation*}
+\begin{split}
+E[X]=\int_{-\infty}^{\infty}x\cdot f_X(x)dx &=\int_{-\infty}^{0}x\cdot 0 dx+\int_{0}^{\infty}x\cdot \frac{1}{a}e^{-\frac{1}{a}x}dx\\
+                                                      &=0+[x\cdot (-e^{-\frac{1}{a}x})]_0^{\infty}-\int_{0}^{\infty}(-e^{-\frac{1}{a}x})dx\\
+                                                      &=0+(\lim_{x\to\infty}-xe^{-\frac{1}{a}x})-0-a\int_{0}^{\infty}(-\frac{1}{a}e^{-\frac{1}{a}x})dx\\
+                                                      &=0-a[e^{-\frac{1}{a}x}]_0^{\infty}=-a(\lim_{x\to\infty} e^{-\frac{1}{a}x})+a\cdot e^{0}=a
+\end{split}
+\end{equation*}
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Jordbävning}
+
+\begin{figure}
+\includegraphics[scale=0.2]{jordbavning.png}
+\end{figure}
+
+Seismologer anser
+att tiden mellan
+japanska
+jordbävningar kan
+anses vara
+exponentialfördelad.
+Låt $X$ vara tiden i
+år till nästa skalv
+med en magnitud
+på minst 7.0 på
+Richterskalan.
+Antag att $X \sim Exp(4/3)$.
+
+\textcolor{blue}{Vad är $P(X>1.5)$?}
+
+\bigskip
+Lösning:
+\pause
+\begin{equation*}
+\begin{split}
+\int_{1.5}^{\infty}f_X(x)dx &=\int_{1.5}^{\infty}f_X(x)dx=\int_{1.5}^{\infty}\frac{1}{4/3}e^{-x/(4/3)}dx\\
+                                         &= \int_{1.5}^{\infty}\frac{3}{4}e^{-\frac{3}{4}x}dx=[-e^{-\frac{3}{4}x}]_{1.5}^{\infty}\\
+                                         &=-\lim_{x\to\infty}e^{-\frac{3}{4}x}+e^{-\frac{3}{4}1.5}=-0+e^{-\frac{3}{4}\cdot \frac{3}{2}}=e^{-\frac{9}{8}}\approx 0.32
+\end{split}
+\end{equation*}
+
+
+
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Användbara egenskaper för exponentialfördelningen}
+
+\begin{enumerate}
+\pause\item \textbf{Täthetsfunktionen för exponetialfördelad stokastisk variabelstrikt avtagande}
+\pause\item \textbf{Minneslösa egenskapen:} $P(X\geq t+t'|X\geq t)=P(X\geq t')$  (se öv. 411)
+%eftersom
+%$$
+%P(X\geq t+t'|X\geq t)=\frac{P(X\geq t+t'\cap X\geq t)}{P(X\geq t)}
+%=\frac{P(X\geq t+t')}{P(X\geq t)}=\frac{e^{-(t+t')/a}}{e^{-t/a}}
+%$$ 
+ 
+\pause\item \textbf{Minimum av ett antal exponentialfördelningar är exponentialfördelad:} Låt $X_1, X_2,...,X_n$ exponentialfördelade med parametrar $1/a_1,1/a_2\dots,1/a_n$. Då är $X=\min(X_1,X_2,\dots, X_n)\sim Exp(1/(a_1+\dots+a_n))$ (se öv. 509).
+
+\pause\item \textbf{Samband med Poissonfördelningen}
+Låt $X(t)$ vara antal händelser under tiden $(0,t]$ och antag att  $X(t)\sim Po(\lambda t)$ dvs 
+$$
+P(X(t)=k)=\frac{(\lambda t)^k}{k!}e^{-{\lambda t}}, \dots k=0,1,2,\dots %\quad\text{dvs $X(t)\sim Po(\lambda t)$.}
+$$
+\pause Låt $Y$ vara tiden mellan två händelser för $X$. Speciellt är då
+%$$
+%P(Y\geq t)=P(X(t)=0)=\frac{(\lambda t)^0}{0!}e^{-{\lambda t}}=e^{-\lambda t}(=\int_t^\infty\lambda e^{-\lambda x}dx), \text{och}
+%$$
+$$
+P(Y\leq t)=P(X(t)=1)=\frac{(\lambda t)^1}{1!}e^{-{\lambda t}}=\lambda t e^{-\lambda t}=1-e^{-\lambda t}
+$$
+dvs $Y\sim Exp(1/\lambda)$.
+\pause\item \textbf{Kan endast inträffa maximalt en händelse under mycket litet tidsintervall:}
+
+\begin{enumerate}
+\item $P(\text{ingen händelse i $(t,t+h]$})=1-\lambda h+o(h)$, $h\to 0$
+\pause\item $P(\text{exakt en händelse i $(t,t+h]$})=\lambda h+o(h)$, $h\to 0$
+\pause\item $P(\text{fler än en händelse i $(t,t+h]$})=o(h)$, $h\to 0$
+\end{enumerate}
+
+
+
+\end{enumerate}
+
+\end{frame}
+
+%\begin{frame}
+%\frametitle{Egenskaper för exponentialfördelningen forts}
+
+%\begin{enumerate}
+
+
+%\item \textbf{Samband med Poissonfördelningen}
+%Låt $X(t)$ vara antal händelser under tiden $(0,t]$ och antag att  $X(t)\sim Po(\lambda t)$ dvs 
+%$$
+%P(X(t)=k)=\frac{(\lambda t)^k}{k!}e^{-{\lambda t}}, \dots k=0,1,2,\dots %\quad\text{dvs $X(t)\sim Po(\lambda t)$.}
+%$$
+%Låt $Y$ vara tiden mellan två händelser för $X$. Speciellt är då
+%$$
+%P(Y\geq t)=P(X(t)=0)=\frac{(\lambda t)^0}{0!}e^{-{\lambda t}}=e^{-\lambda t}(=\int_t^\infty\lambda e^{-\lambda x}dx)
+%$$
+%och
+%$$
+%P(Y\leq t)=P(X(t)=1)=\frac{(\lambda t)^1}{1!}e^{-{\lambda t}}=\lambda t e^{-\lambda t}=1-e^{-\lambda t}
+%$$
+%dvs $Y\sim Exp(1/\lambda)$.
+%\pause\item \textbf{Kan endast inträffa maximalt en händelse under mycket litet tidsintervall:}
+
+%\begin{enumerate}
+%\item $P(\text{ingen händelse i $(t,t+h]$})=1-\lambda h+o(h)$, $h\to 0$
+%\item $P(\text{exakt en händelse i $(t,t+h]$})=\lambda h+o(h)$, $h\to 0$
+%\item $P(\text{fler än en händelse i $(t,t+h]$})=o(h)$, $h\to 0$
+%\end{enumerate}
+
+%\pause\item \textbf{Sammanslagning och uppdelning av Poissonprocesser}
+%\begin{enumerate}
+%\pause\item Superpositionsprincipen: Sammanslagningen av poissonprocesser med intensiteter $\lambda_1,\dots\lambda_n $ ger %Poissonprocess medintensitet $\lambda=\lambda_1+\dots+\lambda_n$.
+
+%\pause\item Uppdelning av en poissonprocess i $n$ delprocesser resulterar i att varje delprocess är en ny Poissonprocess.
+%\end{enumerate}
+
+%\pause Dessa två sista egenskaper är av fundamental betydelse i \textbf{köteori} där köer splittras och slås samman på olika sätt. Man kan %därför använda analytiska metoder då inprocesserna är Poissonprocesser. I annat fall får man ofta förlita sig på \textbf{simuleringsmetoder} %för produktionssystem.
+
+%\end{enumerate}
+
+
+
+%\end{frame}
+
+
+\begin{frame}
+\frametitle{Normalfördelning - vanligast av alla}
+
+
+Modellera mätfel, brus, variation i storlek, olika finansvariabler etc.
+
+Slumpvariabeln $X$ är \textbf{normalfördelad} med parametrar $\mu$ och $\sigma$,
+betecknat \textcolor{blue}{$X\sim N\left(\mu,\sigma^2\right)$} om dess \textcolor{blue}{täthetsfunktion} är
+$$
+\textcolor{blue}{f_X(x) =\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}},
+\quad \text{för $-\infty< x < \infty$}}.
+$$
+
+%För normalfordelningen gäller att
+
+\begin{itemize}
+
+\item $E[X] = \textcolor{blue}{\mu}$
+
+\item $V[X] = \textcolor{blue}{\sigma^2}$, och
+
+\end{itemize}
+
+%\bigskip\pause
+%och
+$$
+P(\mu  - 2\sigma<X <\mu  + 2\sigma)=0.95.
+$$
+
+\begin{figure}
+\includegraphics[scale=0.7]{normal.jpg}
+\end{figure}
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Sammanfattning kontinuerliga stokastiska variabler}
+
+\begin{enumerate}
+
+\pause\item $X$ antar värden $x$ som är decimaltal i ett intervall eller på hela reella axeln
+
+\pause\item Täthetsfunktion (PDF) $f_X(x)\sim$ kurvanpassning normaliserat histogram med små rektanglar (vars totala sammanlagda area är lika med 1)
+
+\pause\item Täthetsfunktion $f_X(x)\sim$ densitet av sannolikhetsmassa, $\int_{-\infty}^{\infty}f_X(x)dx=1$ \\(eng `probability density function') 
+
+\pause\item  Sannolikhet $P(a<X\leq b)=\int_{a}^{b}f_X(x)dx.$
+
+\pause\item  Fördelningsfunktion (CDF) $F_X(x):=P(X\leq x)=\int_{-\infty}^{x}f_X(t)dt.$ 
+
+(`$F_X(x)$ är arean till vänster om $x$')
+
+\pause\item  $\alpha$-kvantil $x=x_{\alpha}$ om $F_X(x_{\alpha})=1-\alpha$.  
+
+(`$\alpha$ är arean till höger om $x_{\alpha}$')
+
+
+\pause\item Likformig fördelning $Re(a,b)$: \pause slumptal, approx normal mm.
+
+\pause\item Exponentialfördelning $Exp(a)$: Tid mellan oberoende händelser med konstant intensitet, 
+kötid, livslängd glödlampa mm.
+
+\pause\item Weibullfördelning $W(a,b)$: Hållfasthet, livslängd kullager, vindhastighet mm.
+
+\pause\item Normalfördelning $N(\mu,\sigma^2)$: Mätfel, brus, längd mm.
+%\pause\item Fördelningsfunktion $F(k)=P(X\leq k)$.
+
+\pause\item Väntevärde (tyngdpunkt, genomsnittsvärde) $\mu=E[X]:=\int_{-\infty}^{\infty} x\cdot f_X(x)dx$.
+
+\pause\item Varians $\sigma^2=V[X]  %&:=E[(X-\mu)^2]=\int_{-\infty}^{\infty} (x-\mu)^2\cdot f_X(x)dx
+                      :=E[(X-\mu)^2]=\int_{-\infty}^{\infty} x^2\cdot f_X(x)dx-\mu^2$.
+
+\end{enumerate}
+
+
+Tack för den här gången!  {\large\sun} {\large\sun} {\large\sun} {\large\sun}
+
+
+\end{frame}
+
+
+
+\end{frame}
+
+
+
+\end{document}
+
+
+
+
+\begin{frame}
+\frametitle{Cliffhanger: fördelningsfunktioner}
+
+Nästa föreläsning: fördelningsfunktioner, kvantiler och räkna med normalfördelning!
+
+
+
+\bigskip
+\pause Räkna följande uppgifter inför R4: 407-408, 411, 413, 417, 420 {\large\smiley{}}
+ %409-410, 414-416, 421-424
+
+\bigskip
+\pause Tack för idag!  {\large\sun} {\large\sun} {\large\sun} {\large\sun}
+
+\end{frame}
+
+
+
+
+
+\end{document}
+
+
+
+
+\begin{frame}
+\frametitle{Fördelningsfunktion}
+
+Man är ofta intresserad av sannolikheter av typen 
+$$
+P(X \leq k).
+$$
+Av den anledningen så har man infört begreppet fördelningsfunktion.
+\textbf{Fördelningsfunktionen} för slumpvariabeln $X$ är
+$$
+F(k) = P(X\leq k).
+$$
+\pause För diskreta stokastiska variabler som kan anta värdena $0,1,2,\dots k$
+(och eventuellt större värden än $k$) gäller det att
+$$
+F(k) =\sum_{i=0}^k p(i).
+$$
+\pause Allmänt gäller att
+$$
+P(a<X\leq b)=F(b)-F(a).
+$$
+
+\end{frame}
+
+
+
+

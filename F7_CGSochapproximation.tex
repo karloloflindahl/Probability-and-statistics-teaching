@@ -1,0 +1,445 @@
+%\documentclass[compress]{beamer}
+
+\documentclass[handout,8pt,hyperref={pdfpagemode=FullScreen}]{beamer}
+%\documentclass[hyperref={pdfpagemode=FullScreen}]{beamer}
+
+\usepackage{amsmath,amssymb,makeidx,amsfonts,latexsym,enumerate,amsthm,tikz,lipsum,schemata,wasysym}
+
+
+%\setbeamercovered{transparent}
+\usepackage{color}
+
+\usepackage{amsmath,amscd,amssymb,amsfonts,graphicx,rotating}
+\usepackage{mathrsfs}
+\usepackage{hyperref}
+
+
+%\usepackage{beamerthemeshadow}
+
+%\usetheme{CambridgeUS}
+
+%\useoutertheme{infolines} %alt compress i documentclass
+
+
+
+\usepackage{cite}
+
+%\setbeamertemplate{footline}{\insertframenumber/\inserttotalframenumber}
+
+
+\usepackage[T1]{fontenc}
+\usepackage[swedish]{babel}
+\usepackage[latin1]{inputenc}
+
+\newtheorem{conjecture}{Conjecture}[section]
+\newtheorem{open problem}{Open problem}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{remark}{Remark}[section]
+
+
+
+
+
+
+
+\title{F7 Approximation med normalfördelning}
+\subtitle{1MA511 Tillämpad sannolikhetslära och statistik}
+
+%\subtitle{\noindent[1] L.The size of quadratic $p$-adic linearization disks \textit{Advances in Mathematics}, 2013\\ 
+%\noindent [2] L. \& Rivera-Letelier,  `Optimal cycles and minimally ramified power series', \textit{Composito Mathematica}, 2014}
+
+\author{Karl-Olof Lindahl}
+
+%\institute{Department of Mathematics, Linnaeus University}
+
+\date{}
+
+
+
+%\frame[c]{\titlepage}
+
+
+
+
+\begin{document}
+
+
+
+\maketitle
+
+
+
+
+\begin{frame}
+
+\frametitle{På agendan}
+
+\begin{enumerate}
+
+
+
+
+%\pause
+\item\textbf{Centrala gränsvärdessatsen (CGS)}
+
+
+
+\item\textbf{Approximation av Binomial och Poisson med Normalfördelning}
+
+\item\textbf{Halvkorrektion för diskreta slumpvariabler}
+
+\item\textbf{Centrala gränsvärdessatsen för medelvärde av observationer}
+
+
+\item\textbf{Stora talens lag}
+
+\end{enumerate}
+
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Sammanfattning funktioner av slumpvariabler}
+
+
+
+\begin{enumerate}
+
+%\pause\item $X+X\neq 2X$ för slumpvariabler.
+
+\pause\item $E[aX+bY+c]=aE[X]+bE[Y]+c$
+
+\pause\item Om dessutom $X$ och $Y$ är \textbf{oberoende}
+
+\begin{enumerate}
+\pause\item $V[aX+bY+c]=a^2V[X]+b^2V[Y]$
+
+\pause\item $E[X\cdot Y]=E[X]\cdot E[Y]$
+\end{enumerate}
+
+\pause\item CGS: Om $X_1,\dots,X_n$ har samma fördelning, är \textbf{oberoende} och
+ 
+1. $E[X_i]=\mu$, 
+
+2. $V[X_i]=\sigma^2$ 
+
+för alla $1\leq i\leq n$ och $n$ stort (typ $n\geq 20$) så är 
+$$
+X_1+X_2+\dots +X_n\sim N(n\cdot\mu,n\cdot\sigma^2).
+$$
+%\pause Galtons experiment: {\small{\url{https://www.youtube.com/watch?v=6YDHBFVIvIs}}}
+
+\begin{figure}
+\includegraphics[scale=0.15]{galtonboard.jpg}
+\end{figure}
+
+
+\end{enumerate}
+
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Approximation av Binomial med normalfördelning}
+
+Kom ihåg $Bin(n,p)$ har väntevärde $\mu=n\cdot p$ och varians $\sigma^2=np(1-p)$.
+
+\bigskip
+\begin{enumerate}
+
+\pause\item Om $X\sim Bin(20,0.4)$ så kan $X$ ses som summan av $n=20$ stycken upprepade oberoende försök med $X_1\sim Bin(1,0.4)$.
+
+\pause\item Enligt CGS (centrala gränsvärdessatsen) är då approximativt 
+$$
+X\sim N(20\cdot 0.4,20\cdot0.4\cdot (1- 0.4))=N(8,4.8)
+$$
+
+\pause\item Följande tumregel används: 
+$$
+Bin(n,p)\approx N(np,np(1-p)) \quad \text{då $np(1-p)\geq 10$}.
+$$ 
+
+\begin{figure}
+\includegraphics[scale=0.2]{approxbin.jpg}
+\end{figure}
+
+\end{enumerate}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Approximation av Poisson med normalfördelning}
+
+Kom ihåg $Po(m)$ har väntevärde $\mu=m$ och varians $\sigma^2=m$.
+
+\bigskip
+\begin{enumerate}
+
+\pause\item Poissonfördelningen härstammar matematiskt från gränsvärdesprocess för binomialfördelning med $p$ litet och $n$ stort.
+
+Tumregel: $n \geq 10 $ och $p\leq 0.1$ $\rightarrow$ $Bin(n,p)\approx Po(n\cdot p)$
+
+\pause\item  Poisson kan därför även approximeras med normalfördelning
+
+\pause\item Följande tumregel används: 
+$$
+Po(m)\approx N(m,m), \quad \text{då $m\geq 15$}.
+$$ 
+
+
+\end{enumerate}
+
+
+\end{frame}
+
+
+
+
+\begin{frame}
+
+\begin{figure}
+\includegraphics[scale=0.5]{approx_poisson_normal.eps}
+\end{figure}
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Halvkorrektion \textbf{diskret} approx med normalfördelning}
+
+%\begin{figure}
+%\includegraphics[scale=0.15]{approx_poisson_normal.eps}
+%\end{figure}
+
+%För att kompensera de fall då diskret fördelning approximeras med normal används \textbf{halvkorrektion}:
+Antag att $X_1,\dots,X_{20}\sim Po(5)$ och att $Y=X_1+X_2+\dots+X_{20}$. 
+
+Bestäm $P(Y\leq 110)$.
+
+\bigskip
+\pause \underline{Lösning:}  Eftersom $\mu=5$ och $\sigma^2=5$ för $Po(5)$ 
+ger CGS ger att 
+$$
+Y\sim Po(20\cdot 5, 20\cdot 5)=N(100,100)
+$$
+
+\pause Med \textbf{halvkorrektion} blir då
+
+$$
+P(Y\leq 110)\approx \Phi(\frac{110+0.5-100}{\sqrt{100}})=\Phi(1.05)=0.8531
+$$
+\end{frame}
+
+
+
+
+
+
+\begin{frame}
+\frametitle{Hur många parkeringsplatser? Lösningsbeskrivning i Polyas 4 steg se R7'}
+
+\begin{figure}
+\includegraphics[scale=0.13]{parkering.jpg}
+\end{figure}
+
+
+{\small 100 lägenheter byggs. Av erfarenhet från
+liknande områden vet man att ca 25\% av hushållen 
+har 0 bilar, ca 50\% har 1 bil och ca 25\% har 2 bilar.
+Hur många parkeringsplatser måste planeras om  alla bilar skall få plats med 95\% sannolikhet?
+
+
+%\pause
+
+\begin{enumerate}
+\item\pause  Förstå problemet:
+\pause a. \textbf{\underline{Inför beteckningar} för variabler:} \pause $X_i=$ antalet bilar i hushåll $i$ och totala antalet bilar $X=X_1+\dots+X_{100}$. 
+
+\pause b. \textbf{\underline{Söker} - Formulera problemet matematiskt i termer av införda variabler:} 
+
+\pause Söker tal $x$ så att  $P(X\leq x)=0.95$. 
+
+\pause c.  \textbf{\underline{Vet} utifrån data i uppgiften:} \pause sannolikhetsfunktionen för $X_i$: $p(X_i=0)=0.25$, $p(X_i=1)=0.5$, $p(X_i=2)=0.25$.
+
+\pause d. \textbf{\underline{Vet} utifrån teori:} 
+\pause Summan $X$ är approximativt  normalfördelad enligt CGS.  
+
+
+ %\textbf{Plan} 
+\item\pause Plan: \pause Bestäm fördelningen för $X$ och 0.05-kvantilen för denna fördelning. För att bestämma fördelningen för $X$ bestämmer vi först väntevärde och varians för de ingående variablerna $X_i$ och utnyttjar därefter CGS för summor av slumpvariabler.
+
+\item \pause Genomförande: %Beräkna först väntevärde och varians för $X_i$.
+\pause $\mu=E[X_i]=\sum x p(x)=0\cdot 0.25+1\cdot 0.5+ 2\cdot 0.25=1 $ %bilar och 
+
+\pause $\sigma^2=E[X_i^2]-\mu^2=0^2\cdot 0.25+1^2\cdot 0.5+ 2^2\cdot 0.25-1^2=0.5$.
+
+\pause CGS $\Rightarrow$ $X=X_1+\dots+X_{100}\approx N(100\cdot \mu,100\cdot \sigma^2)=N(100,50)$ 
+
+
+
+\pause Söker $x=x_{0.05}$ så att $P(X\leq x) =0.95$  \pause $\Rightarrow \Phi(\frac{x+0.5-100}{\sqrt{50}})=0.95$
+
+\pause $\Rightarrow z=\frac{x+0.5-100}{\sqrt{50}}=1.645$ enligt tabell $\Rightarrow$ 
+
+\pause $x=1.645\cdot \sqrt{50}+99.5=111.13$  \pause Så det behövs \pause 112 parkeringsplatser.
+
+\item Se tillbaka: \textbf{Rimlighetsbedömning:} \pause Tumregeln för normalfördelningar ger att för en normalfördelning täcker intervallet $[\mu\pm 2\sigma]$ ca 91\%  av totala sannolikhetsmassan. Alltså borde det krävas knappt $100+2\sqrt{50}\approx 114$ parkeringsplatser.
+%%\pause$ \textbf{c)} 
+%%\pause $P(X\leq 75)=\pause \Phi(\frac{75-100}{\sqrt{50}})=\pause1-\Phi(3.54)=\pause 1-0.9998=0.0002$.
+
+\end{enumerate}
+
+}
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Centrala gränsvärdessatsen för medelvärden av slumpvariabler}
+
+CGS: Om $X_1,\dots,X_n$ har samma fördelning, är \textbf{oberoende} och
+ 
+1. $E[X_i]=\mu$, 
+
+2. $V[X_i]=\sigma^2$ 
+
+för alla $1\leq i\leq n$ och $n$ stort (typ $n\geq 20$) så är 
+$$
+\overline{X}=\frac{X_1+X_2+\dots +X_n}{n}\sim N(\mu,\frac{\sigma^2}{n}).
+$$
+
+\bigskip
+Obs! Variansen $\frac{\sigma^2}{n}$ minskar då antalet mätningar $n$ ökar {\large\smiley{}}
+
+\pause
+\bigskip Vilken fördelning har $\overline{X}=\frac{X_1+X_2+\dots +X_{20}}{20}$ om varje $X_i\sim Po(5)$? 
+
+\pause Om varje $X_i\sim Bin(10,0.2)$?
+
+\pause Om varje $X_i\sim Exp(10)$?
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Stora talens lag}
+
+Vi betraktar
+$$
+\overline{X}=\frac{X_1+X_2+\dots +X_n}{n}
+$$
+Antag att slumpvariablerna Om $X_1,\dots,X_n$ är \textbf{oberoende} och har
+samma väntevärde $\mu$.
+
+\bigskip
+Man kan då visa att
+
+$$
+P(\overline{X}\to\mu \text{ då } n\to\infty)= 1
+$$
+vilket vi tolkar som att medelvärdet $\overline{X}$
+ligger nära $\mu$ då antalet
+observationer $n$ är stort.
+
+\bigskip
+Resultatet kallas \textbf{stora talens lag} och är en av de stora satserna
+inom sannolikhetsteorin och vetenskap i allmänhet.
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Cliffhanger: Skattning av väntevärden}
+
+
+%Nästa föreläsning: Mer om centrala gränsvärdessatsen, Galtons experiment, och approximation med normalfördelning, och stora talens lag
+%\url{https://www.youtube.com/watch?v=6YDHBFVIvIs}!
+
+
+\begin{figure}
+\includegraphics[scale=0.3]{sjukhus.jpg}
+\end{figure}
+
+I en stad finns två sjukhus som oberoende av varandra undersöker hur vanlig en viss sjukdom är bland stadens invånare. Resultat:
+
+\begin{enumerate}
+\item[Sjukhus 1:] $x_1=52$ utav $n_1=500$ slumpvis valda patienter har sjukdomen. 
+
+\item[Sjukhus 2:] $x_2=87$ utav $n_2=750$ slumpvis valda patienter har sjukdomen. 
+\end{enumerate}
+
+
+
+\begin{enumerate}
+\item[a)]  Hur stor andel av stadens invånare bär på sjukdomen? (kap. 6)
+
+\pause\item[b)] Hur stor är osäkerheten? (kap. 7)
+
+\end{enumerate}
+
+
+
+\bigskip
+\pause Till räkneövning R7: 509, 511-520 samt läs materialet R7' på MyMoodle {\large\smiley{}}
+ %409-410, 414-416, 421-424u
+
+\bigskip
+\pause Tack för uppmärksamheten! {\large\sun} {\large\sun} {\large\sun} {\large\sun} {\large\sun} {\large\sun} {\large\sun}
+
+
+
+\end{frame}
+
+%\begin{frame}
+%\frametitle{Tyst minut för terrorns offer}
+
+
+%\begin{figure}
+%\includegraphics[scale=2]{terror_blommor.jpg}
+%\end{figure}
+
+
+%\end{frame}
+
+
+
+
+
+\end{document}
+
+
+
+
+\begin{frame}
+\frametitle{Fördelningsfunktion}
+
+Man är ofta intresserad av sannolikheter av typen 
+$$
+P(X \leq k).
+$$
+Av den anledningen så har man infört begreppet fördelningsfunktion.
+\textbf{Fördelningsfunktionen} för slumpvariabeln $X$ är
+$$
+F(k) = P(X\leq k).
+$$
+\pause För diskreta slumpvariabler som kan anta värdena $0,1,2,\dots k$
+(och eventuellt större värden än $k$) gäller det att
+$$
+F(k) =\sum_{i=0}^k p(i).
+$$
+\pause Allmänt gäller att
+$$
+P(a<X\leq b)=F(b)-F(a).
+$$
+
+\end{frame}
+
+
+
+

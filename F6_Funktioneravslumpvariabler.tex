@@ -1,0 +1,487 @@
+%\documentclass[compress]{beamer}
+
+\documentclass[10pt,hyperref={pdfpagemode=FullScreen}]{beamer}
+%\documentclass[hyperref={pdfpagemode=FullScreen}]{beamer}
+
+\usepackage{amsmath,amssymb,makeidx,amsfonts,latexsym,enumerate,amsthm,tikz,lipsum,schemata,wasysym}
+
+
+%\setbeamercovered{transparent}
+\usepackage{color}
+
+\usepackage{amsmath,amscd,amssymb,amsfonts,graphicx,rotating}
+\usepackage{mathrsfs}
+\usepackage{hyperref}
+
+
+%\usepackage{beamerthemeshadow}
+
+%\usetheme{CambridgeUS}
+
+%\useoutertheme{infolines} %alt compress i documentclass
+
+
+
+\usepackage{cite}
+
+%\setbeamertemplate{footline}{\insertframenumber/\inserttotalframenumber}
+
+
+\usepackage[T1]{fontenc}
+\usepackage[swedish]{babel}
+\usepackage[latin1]{inputenc}
+
+\newtheorem{conjecture}{Conjecture}[section]
+\newtheorem{open problem}{Open problem}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{remark}{Remark}[section]
+
+
+
+
+
+
+
+\title{F6 Funktioner av slumpvariabler}
+\subtitle{1MA 511 Tillämpad sannolikhetslära och statistik}
+
+%\subtitle{\noindent[1] L.The size of quadratic $p$-adic linearization disks \textit{Advances in Mathematics}, 2013\\ 
+%\noindent [2] L. \& Rivera-Letelier,  `Optimal cycles and minimally ramified power series', \textit{Composito Mathematica}, 2014}
+
+\author{Karl-Olof Lindahl}
+
+%\institute{Department of Mathematics, Linnaeus University}
+
+\date{}
+
+
+
+%\frame[c]{\titlepage}
+
+
+
+
+\begin{document}
+
+
+
+\maketitle
+
+
+
+
+\begin{frame}
+
+\frametitle{På agendan}
+
+\begin{enumerate}
+
+
+
+%\pause
+\item\textbf{Funktioner av slumpvariabler}
+
+%\pause
+\item\textbf{Oberoende slumpvariabler}
+
+
+%\pause
+\item\textbf{Summor av slumpvariabler}
+
+
+%\pause
+\item\textbf{Räkneregler för väntevärde och varians}
+
+\item\textbf{Dimensionering antal parkeringsplatser}
+
+\item\textbf{Centrala gränsvärdessatsen}
+
+\item\textbf{Tyst minut för terrorns offer}
+
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Funktioner av slumpvariabler}
+
+Ett företag tillverkar brädor av längden 1 m. Vid tillverkningen varierar längden kring det exakta värdet 1 m. 
+Avvikelsen i meter $X$ är normalfördelad med väntevärde $\mu=0.001$ och standardavvikelse $\sigma=0.005$.
+Låt $Y$ vara längden för en slumpvis vald tillverkad bräda.
+
+\begin{enumerate}
+
+\pause\item Uttryck $Y$ som funktion av $X$.
+
+\pause\item Vilken fördelning har $Y$?
+
+\end{enumerate}
+
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Funktioner av slumpvariabler - summa tärningskast}
+
+
+\begin{turn}{90}
+
+\begin{figure}
+%\begin{center}
+\includegraphics[scale=0.04]{3tarning.jpg}
+%\end{center}
+\end{figure}
+
+\end{turn}
+
+
+Antag att vi har en balanserad sexsidig tärning där två sidor är numrerade med 1, två sidor med 2, och två sidor med 3.
+
+Låt $X$ vara resultatet av ett tärningskast. Låt $Y$ vara resultatet av ett andra tärningskast.
+
+Låt $Z$ vara det \textbf{sammanlagda resultatet efter 2 kast.}
+
+\begin{enumerate}
+
+\pause\item Uttryck $X$ som funktion av $X$ och $Y$.
+
+\pause\item Vilken fördelning har $Z$?
+
+\end{enumerate}
+
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Funktioner av slumpvariabler - dubblering utfall från t-kast}
+
+
+\begin{turn}{90}
+
+\begin{figure}
+%\begin{center}
+\includegraphics[scale=0.04]{3tarning.jpg}
+%\end{center}
+\end{figure}
+
+\end{turn}
+
+
+Antag att vi har en balanserad sexsidig tärning där två sidor är numrerade med 1, två sidor med 2, och två sidor med 3.
+
+Låt $X$ vara resultatet av ett tärningskast. 
+
+Låt $Z$ vara resultatet efter en \textbf{dubblering av värdet av ett tärningskast}.
+
+\begin{enumerate}
+
+\pause\item Uttryck $Z$ som funktion av $X$.
+
+\pause\item Vilken fördelning har $Z$?
+
+\end{enumerate}
+
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Kom ihåg!}
+För slumpvariabler är i regel
+$$
+X+X\neq 2X
+$$
+
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Oberoende slumpvariabler}
+
+Två  händelser $A$
+och $B$ är oberoende om $P(A|B)=P(A)$ så att
+$$
+P(A\cap B) = P(A) \cdot P(B).
+$$ 
+
+
+\bigskip
+Två slumpvariabler $X$ och $Y$ kallas \textbf{oberoende}
+om
+$$
+P(\{X\leq x\}\cap\{Y\leq y\}) = P(X\le x)\cdot P(Y\le y)
+$$
+för alla värden på $x$ och $y$.
+
+\pause\bigskip
+Många beräkningar blir betydligt enklare när
+man jobbar med oberoende slumpvariabler.
+Nar man redovisar problem på kursen så är det
+viktigt att poängtera när man utnyttjar att
+slumpvariabler är oberoende!
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Räkneregler för väntevärde och varians}
+
+
+Väntevärde:
+$$
+E[aX+bY+c]=aE[X]+bE[Y]+c
+$$
+
+
+\bigskip\pause 
+Antag nu att $X$ och $Y$ är \textbf{oberoende}. Då är
+
+\begin{enumerate}
+
+\pause\item $V[aX+bY+c]=a^2V[X]+b^2V[Y]$
+
+\pause\item $E[X\cdot Y]=E[X]\cdot E[Y]$
+
+\end{enumerate}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Hur många parkeringsplatser?}
+
+\begin{figure}
+\includegraphics[scale=0.3]{parkering.jpg}
+\end{figure}
+
+
+Ett företag ska bygga 100 nya lägenheter. Utifrån erfarenhet från
+liknande områden vet man att sannolikheten är 25\% att ett
+hushåll inte har någon bil, 50\% att ett hushåll har en bil och 25\%
+att ett hushåll har två bilar.
+
+\begin{enumerate}
+
+\item[a)] Uttryck totala antalet bilar $Y$ som funktion av de enskilda hushållens bilar $X_1,\dots,X_{100}$.
+
+\item[b)] Hur många bilar kan man förvänta sig att hushållen har
+tillsammans?
+
+\pause\item[c)] Vilken fördelning har $Y$?
+
+\end{enumerate}
+
+%\pause
+%\bigskip Lösning: \textbf{a)}  $Y=X_1+\dots+X_{100}$
+
+%Lösning: \textbf{b)} \pause Enskilt hushåll $X_i$ har 
+
+%\pause $\mu=E[X_i]=\sum x p(x)=0\cdot 0.25+1\cdot 0.5+ 2\cdot 0.25=1 $ bilar och 
+%%%\pause $\sigma^2=E[X_i^2]-\mu^2=0^2\cdot 0.25+1^2\cdot 0.5+ 2^2\cdot 0.25-1^2=0.5$.
+
+%%%\pause CGS $\Rightarrow$ $X=X_1+\dots+X_{100}\approx N(100\cdot \mu,100\cdot \sigma^2)=N(100,50)$ 
+
+%\pause så \pause hushållen väntas sammanlagt ha $E[X_1+\dots+X_{100}]=1+\dots+1=100$ bilar.
+
+%%%\pause \textbf{b)} \pause Söker $\alpha$ så att $P(X\leq \alpha) =0.95$  \pause $\Rightarrow \Phi(\frac{\alpha-100}{\sqrt{50}})=0.95$
+
+%%%\pause $\Rightarrow z=\frac{\alpha-100}{\sqrt{50}}=1.645$ enligt tabell $\Rightarrow 
+%%\pause \alpha=1.645\cdot \sqrt{50}+100=111.63$ 
+
+%%%\pause Så det behövs \pause 112 parkeringsplatser.
+
+%%%\pause \textbf{c)} 
+%%%\pause $P(X\leq 75)=\pause \Phi(\frac{75-100}{\sqrt{50}})=\pause1-\Phi(3.54)=\pause 1-0.9998=0.0002$.
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Additionssatser för viktiga \emph{specialfall}}
+
+Antag att $X_1$ och $X_2$ är \emph{oberoende} slumpvariabler och
+$$
+Y=X_1+X_2.
+$$
+
+\begin{enumerate}
+
+\pause\item $X_1\sim Bin(n_1,p)$ och $X_2\sim Bin(n_2,p)$ $\Rightarrow$ 
+$$
+Y\sim Bin(n_1+n_2,p).
+$$
+
+\pause\item $X_1\sim P(m_1)$ och $X_2\sim Po(m_2)$ $\Rightarrow$ 
+$$
+Y\sim Po(m_1+m_2).
+$$
+
+\pause\item $X_1\sim N(\mu_1,\sigma_1^2)$ och $X_2\sim N(\mu_2,\sigma_2^2)$ $\Rightarrow$ 
+$$
+Y\sim N(\mu_1+\mu_2,\sigma_1^2+\sigma_2^2).
+$$
+
+\end{enumerate}
+
+\pause Om $Y=aX_1+bX_2$ har vi för normalfördelningen dessutom att
+$$
+Y\sim N(a\mu_1+b\mu_2,a^2\sigma_1^2+b^2\sigma_2^2).
+$$
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Centrala gränsvärdessatsen (CGS)}
+
+\textbf{Centrala gränsvärdessatsen (CGS):} Summan av tillräckligt stort antal \emph{likafördelade oberoende} slumpvarabler är normalfördelade!
+
+\bigskip
+Mer precist. Om $X_1,\dots,X_n$ har samma fördelning och är oberoende och
+
+1. $E[X_i]=\mu$, 
+
+2. $V[X_i]=\sigma^2$ 
+
+för alla $1\leq i\leq n$ och $n$ stort (typ $n\geq 20$) så är 
+$$
+X_1+X_2+\dots +X_n\sim N(n\cdot\mu,n\cdot\sigma^2).
+$$
+\pause Galtons experiment: {\small{\url{https://www.youtube.com/watch?v=6YDHBFVIvIs}}}
+
+\begin{figure}
+\includegraphics[scale=0.3]{galtonboard.jpg}
+\end{figure}
+
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Hur många parkeringsplatser?}
+
+\begin{figure}
+\includegraphics[scale=0.3]{parkering.jpg}
+\end{figure}
+
+
+Ett företag ska bygga 100 nya lägenheter. Utifrån erfarenhet från
+liknande områden vet man att sannolikheten är 25\% att ett
+hushåll inte har någon bil, 50\% att ett hushåll har en bil och 25\%
+att ett hushåll har två bilar.
+
+\begin{enumerate}
+
+\item[a)] Uttryck totala antalet bilar $Y$ som funktion av de enskilda hushållens bilar $X_1,\dots,X_{100}$.
+
+\item[b)] Hur många bilar kan man förvänta sig att hushållen har
+tillsammans?
+
+\item[c)] \textbf{Vilken fördelning har $Y$?}
+
+\end{enumerate}
+
+%\pause
+
+%\textbf{c)} \pause Enskilt hushåll $X_i$ har 
+
+%$\mu=E[X_i]=\sum x p(x)=0\cdot 0.25+1\cdot 0.5+ 2\cdot 0.25=1 $ bilar och 
+
+%\pause $\sigma^2=E[X_i^2]-\mu^2=0^2\cdot 0.25+1^2\cdot 0.5+ 2^2\cdot 0.25-1^2=0.5$.
+
+%\pause CGS $\Rightarrow$ $X=X_1+\dots+X_{100}\approx N(100\cdot \mu,100\cdot \sigma^2)=N(100,50)$ 
+
+
+
+%%\pause \textbf{b)} \pause Söker $\alpha$ så att $P(X\leq \alpha) =0.95$  \pause $\Rightarrow \Phi(\frac{\alpha-100}{\sqrt{50}})=0.95$
+
+%%\pause $\Rightarrow z=\frac{\alpha-100}{\sqrt{50}}=1.645$ enligt tabell $\Rightarrow 
+%%\pause \alpha=1.645\cdot \sqrt{50}+100=111.63$ 
+
+%%\pause Så det behövs \pause 112 parkeringsplatser.
+
+%%\pause \textbf{c)} 
+%%\pause $P(X\leq 75)=\pause \Phi(\frac{75-100}{\sqrt{50}})=\pause1-\Phi(3.54)=\pause 1-0.9998=0.0002$.
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Cliffhanger: Centrala gränsvärdessatsen (CGS), Galton board, approximation (spec. diskreta fallet med halvkorrektion) med normalfördelning, och stora talens lag}
+
+\begin{figure}
+\includegraphics[scale=0.3]{galtonboard.jpg}
+\end{figure}
+
+
+%Nästa föreläsning: Mer om centrala gränsvärdessatsen, Galtons experiment, och approximation med normalfördelning, och stora talens lag
+%\url{https://www.youtube.com/watch?v=6YDHBFVIvIs}!
+
+
+\bigskip
+\pause Till räkneövning R6: 501-513 {\large\smiley{}}
+ %409-410, 414-416, 421-424u
+
+\bigskip
+\pause Tack för idag! {\large\sun} {\large\sun} {\large\sun} {\large\sun} {\large\sun} {\large\sun}
+
+
+
+\end{frame}
+
+%\begin{frame}
+%\frametitle{Tyst minut för terrorns offer}
+
+
+%\begin{figure}
+%\includegraphics[scale=2]{terror_blommor.jpg}
+%\end{figure}
+
+
+%\end{frame}
+
+
+
+
+
+\end{document}
+
+
+
+
+\begin{frame}
+\frametitle{Fördelningsfunktion}
+
+Man är ofta intresserad av sannolikheter av typen 
+$$
+P(X \leq k).
+$$
+Av den anledningen så har man infört begreppet fördelningsfunktion.
+\textbf{Fördelningsfunktionen} för slumpvariabeln $X$ är
+$$
+F(k) = P(X\leq k).
+$$
+\pause För diskreta slumpvariabler som kan anta värdena $0,1,2,\dots k$
+(och eventuellt större värden än $k$) gäller det att
+$$
+F(k) =\sum_{i=0}^k p(i).
+$$
+\pause Allmänt gäller att
+$$
+P(a<X\leq b)=F(b)-F(a).
+$$
+
+\end{frame}
+
+
+
+
